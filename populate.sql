@@ -27,11 +27,11 @@ INSERT INTO tag ("tag") VALUES
     ('Fountain');
 
 
-INSERT INTO exercise_spot ("id", "geometry", "track") VALUES
+INSERT INTO exercise_spot ("id", "geometry", "track_id") VALUES
     ('1', 'SRID=4326;GEOMETRYCOLLECTION(POINT(50.812064 4.372454))', '1');
 
 
-INSERT INTO tagged ("track", "tag") VALUES
+INSERT INTO tagged ("track_id", "tag") VALUES
     ('2', 'Nature'),
     ('2', 'Pic Nic'),
     ('3', 'Nature'),
@@ -48,18 +48,18 @@ INSERT INTO "user" ("id", "weight", "height", "male", "birth_year") VALUES
     ('4', '57', '152', 'false', '1991');
 
 
-INSERT INTO exercise_rating ("grade", "review", "exercise_spot", "user") VALUES
+INSERT INTO exercise_rating ("grade", "review", "exercise_spot_id", "user_id") VALUES
     ('5', 'Well placed exercice spot in the woods', '1', '1'),
     ('3', 'Too much people waiting for the spot', '1', '2');
 
 
-INSERT INTO record ("id", "start_time", "end_time", "calories", "track", "activitytype", "user") VALUES
+INSERT INTO record ("id", "start_time", "end_time", "calories", "track_id", "activitytype_id", "user_id") VALUES
     ('1', '2012-12-21 11:11:11', '2012-12-21 13:01:44', '458', '10', '1', '1'),
     ('2', '2013-12-21 12:12:12', '2013-12-21 13:01:44', '841', '3', '2', '2'),
     ('3', '2014-12-21 13:13:13', '2014-12-21 14:01:44', '547', '7', '2', '3'),
     ('4', '2015-11-13 17:38:14', '2015-11-13 18:42:21', '502', '4', '4', '4');
 
 
-INSERT INTO rating ("grade", "review", "record") VALUES
+INSERT INTO rating ("grade", "review", "record_id") VALUES
     ('2', 'Too long, I was rapidly tired', '3'),
     ('4', 'Yeah really good track, loved it', '4');
