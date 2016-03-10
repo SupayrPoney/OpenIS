@@ -53,7 +53,7 @@ INSERT INTO exercise_rating ("grade", "review", "exercise_spot_id", "user_id") V
     ('3', 'Too much people waiting for the spot', '1', '2');
 
 
-INSERT INTO record ("id", "start_time", "end_time", "calories", "track_id", "activitytype_id", "user_id") VALUES
+INSERT INTO record ("id", "start_time", "end_time", "calories", "track_id", "activity_type_id", "user_id") VALUES
     ('1', '2012-12-21 11:11:11', '2012-12-21 13:01:44', '458', '10', '1', '1'),
     ('2', '2013-12-21 12:12:12', '2013-12-21 13:01:44', '841', '3', '2', '2'),
     ('3', '2014-12-21 13:13:13', '2014-12-21 14:01:44', '547', '7', '2', '3'),
