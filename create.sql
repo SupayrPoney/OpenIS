@@ -9,12 +9,13 @@ CREATE TABLE "tag" (
 
 CREATE TABLE "track" (
   "id" SERIAL PRIMARY KEY,
-  "geometry" GEOMETRY(LineStringZ, 4326) NOT NULL
+  "geometry" GEOGRAPHY(LineStringZ, 4326) NOT NULL,
+  "length" REAL NOT NULL
 );
 
 CREATE TABLE "exercise_spot" (
   "id" SERIAL PRIMARY KEY,
-  "geometry" TEXT NOT NULL,
+  "geometry" GEOGRAPHY(GeometryCollection, 4326) NOT NULL,
   "track" INTEGER NOT NULL
 );
 
@@ -35,13 +36,17 @@ ALTER TABLE "tagged" ADD CONSTRAINT "fk_tagged__tag" FOREIGN KEY ("tag") REFEREN
 ALTER TABLE "tagged" ADD CONSTRAINT "fk_tagged__track" FOREIGN KEY ("track") REFERENCES "track" ("id");
 
 CREATE TABLE "user" (
-  "id" SERIAL PRIMARY KEY
+  "id" SERIAL PRIMARY KEY,
+  "weight" REAL NOT NULL,
+  "height" REAL NOT NULL,
+  "male" BOOLEAN NOT NULL,
+  "birth_year" INTEGER NOT NULL
 );
 
 CREATE TABLE "exercise_rating" (
   "id" SERIAL PRIMARY KEY,
   "grade" INTEGER NOT NULL,
-  "review" TEXT NOT NULL,
+  "review" TEXT,
   "exercise_spot" INTEGER NOT NULL,
   "user" INTEGER NOT NULL
 );
@@ -58,7 +63,7 @@ CREATE TABLE "record" (
   "id" SERIAL PRIMARY KEY,
   "start_time" TIMESTAMP NOT NULL,
   "end_time" TIMESTAMP NOT NULL,
-  "calories" DECIMAL(12, 2) NOT NULL,
+  "calories" REAL NOT NULL,
   "track" INTEGER NOT NULL,
   "activitytype" INTEGER NOT NULL,
   "user" INTEGER NOT NULL
@@ -73,12 +78,9 @@ ALTER TABLE "record" ADD CONSTRAINT "fk_record__track" FOREIGN KEY ("track") REF
 ALTER TABLE "record" ADD CONSTRAINT "fk_record__user" FOREIGN KEY ("user") REFERENCES "user" ("id");
 
 CREATE TABLE "rating" (
-  "id" SERIAL PRIMARY KEY,
   "grade" INTEGER NOT NULL,
   "review" TEXT NOT NULL,
-  "record" INTEGER NOT NULL
+  "record" INTEGER PRIMARY KEY
 );
 
-CREATE INDEX "idx_rating__record" ON "rating" ("record");
-
-ALTER TABLE "rating" ADD CONSTRAINT "fk_rating__record" FOREIGN KEY ("record") REFERENCES "record" ("id")
+ALTER TABLE "rating" ADD CONSTRAINT "fk_rating__record" FOREIGN KEY ("record") REFERENCES "record" ("id");
