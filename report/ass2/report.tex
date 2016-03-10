@@ -29,17 +29,17 @@ We first describe the conceptual schema of our database. The following sections 
 
 \section{Description of the database}
 
-The `USER` entity describe a user.
+The \textbf{USER} entity describe a user. The user has a \textbf{records} attribute which relates to \textbf{RECORD} and a \textbf{exercise\_ratings} which relates to \textbf{EXERCISE\_RATING} (more on that later). They also have the \textbf{weight}, \textbf{height}, \textbf{birth\_year} and \textbf{male} attributes used to compute their physical shape and calories burn. The two latter attributes are used to determine the age and gender of the user.
 
-The `EXERCISE\_SPOT` entity describes a spot along a track.
+The \textbf{EXERCISE\_SPOT} entity describes a spot along a track. Its \textbf{geometry} attribute is a list of spatial coordinates managed by the PostgreSQL plugin PostGIS (\url{http://postgis.net}). This data will be retrieved from the user's device in the GPX file format (\url{http://www.topografix.com/gpx.asp}). It has a \textbf{rating} attribute related to an \textbf{EXERCISE\_RATING}.
 
-The `EXERCISE\_RATING` entity describes the rating that a `USER` gives to an `EXERCISE\_SPOT`
+The \textbf{EXERCISE\_RATING} entity describes the rating that a \textbf{USER} gives to an \textbf{EXERCISE\_SPOT}.The \textbf{grade} attribute is a scale of 0 to 5 and the optional \textbf{review} is a short description/explaination of the rating.
 
-The `TRACK` entity describes a track. Its `geometry` attribute is a list of spatial coordinates managed by the PostgreSQL plugin PostGIS (\url{http://postgis.net}). This data will be retrieved from the user's device in the GPX file format (\url{http://www.topografix.com/gpx.asp}). Its `length` attribute is computed in the database during the creation of a track and stored.
+The \textbf{TRACK} entity describes a track. Its \textbf{geometry} attribute is similar to the one of \textbf{EXERCISE\_SPOT}. Its \textbf{length} attribute is computed in the database during the creation of a track and stored.
 
-The `TAG` entity describes a tag (i.e. a keyword) related to a track. The `TAGGED` entity is the link between a `TRACK` and a `TAG` because the relation between `TAG` and `TRACK` is many-to-many.
+The \textbf{TAG} entity describes a tag (i.e. a keyword) related to a track. The \textbf{TAGGED} entity is the link between a \textbf{TRACK} and a \textbf{TAG} because the relation between \textbf{TAG} and \textbf{TRACK} is many-to-many.
 
-The `RECORD` entity describes the route of a user along a `TRACK`. It has the `start\_time` and `end\_time` self-explained attributes. The `activity\_type` attribute relates to the type of activity (running, walking...). The `calories` attribute is computed when the user has finished based on the `activity\_type`, the `length` of the `track` and the `weight`, `height`, age and gender of the user.
+The \textbf{RECORD} entity describes the route of a user along a \textbf{TRACK}. It has the \textbf{start\_time} and \textbf{end\_time} self-explained attributes. The \textbf{activity\_type} attribute relates to the type of activity (running, walking...). The \textbf{calories} attribute is computed in the database when the user has finished based on the \textbf{activity\_type}, the \textbf{length} of the \textbf{track} and the \textbf{weight}, \textbf{height}, age and gender of the user. The \textbf{rating} attribute relates to a \textbf{RATING} working the same way as an \textbf{EXERCISE\_RATING}.
 
 \section{Tracks}
 
