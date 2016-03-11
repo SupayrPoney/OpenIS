@@ -37,14 +37,16 @@ When a user wants to record its use of a new or existing track, our application 
 
 The length of the track will be computed only once when the user saves and stored in the database for performance issues. It will indeed never change and should be stored even if it redundant.
 
+The tracks will be displayed on a map in our application. This will allow users to clearly see the path the track follows.
+
 \section{Tags}
 
 Users will be able to tag tracks with keywords and search tracks based on these keywords. Each track will have none, one or several tags attached to it and one tag will be able to relate to several tracks. That way, users will find tracks related to their interests and methods of exercising.
 
 \section{Exercise spots}
 
-Along the tracks, users will be able to specify spots where they exercise (a specific location where they practice a sport or a part of a track that they like). They will be allowed to rate these spots with a grade and an optional review to permit other users to discover these spots.
-When a user views a specific track, the spots will be displayed along their ratings.
+Along the tracks, users will be able to specify spots where they exercise (a specific location where they practice a sport or a part of a track that they like). They will be allowed to rate these spots with a grade up to 5 stars and an optional review to permit other users to discover these spots.
+When a user views a specific track, the spots will be displayed with their ratings.
 
 \section{Description of the database}
 
@@ -58,7 +60,7 @@ We use PostgreSQL\footnote{\url{http://www.postgresql.org/}} with the PostGis\fo
 
 
 \subsection{User}
-A user contribute to the information system by creating an account and providing
+A user contributes to the information system by creating an account and providing
 some information about its body. These informations are used to approximate the
 number of calories spent by users on different tracks.
 
@@ -66,6 +68,8 @@ number of calories spent by users on different tracks.
 \paragraph{weight} Its weight, in kg (integer)
 \paragraph{height} Its height, in cm (integer)
 \paragraph{male} Indicate whether the user is female (\texttt{false}) or male (\texttt{true})
+
+Using "male" instead of gender allows ut to restrain the values to being boolean (instead of for example integers that would have too many possible values).
 
 
 \subsection{Track}
@@ -75,7 +79,7 @@ The central model of our database is a \textbf{Track}, which consists of:
 \paragraph{geometry} A geographic linestring of gps records (latitude, longitude, elevation)
 \paragraph{length} Its length in meters (float)
 
-Using gps recorders, User can create geographic traces of their activities on
+Using gps recorders, a user can create geographic traces of their activities on
 their smartphones and upload them to our information system. For example a GPX\footnote{\url{http://www.topografix.com/gpx.asp}}
 file importer might be implemented.
 
@@ -88,7 +92,7 @@ tracks according to the user mood.
 \subsection{Exercice Spot}
 All along these tracks, users could also insert informations about the exercises
 point they find. An exercice point is a large notion including special variations
-of a track, exercising devices, or even sportshalls and public infrastructures.
+of a track, exercising devices, or even sport halls and public infrastructures.
 
 \paragraph{id} Its identifier (integer)
 \paragraph{geometry} A collection of geographic features (points, lines, etc...)
@@ -96,7 +100,7 @@ of a track, exercising devices, or even sportshalls and public infrastructures.
 
 
 \subsection{Record}
-When a user go for a run on a track included in the databse, he can record his
+When a user goes for a run on a track included in the databse, he can record his
 performance and provide an optional rating.
 
 \paragraph{id} Its identifier (integer)
@@ -119,7 +123,7 @@ our database also lists different activity types.
 User can optionally provide ratings for their records, and exercises spots.
 
 \paragraph{id} Its identifier (integer)
-\paragraph{grade} A general appreciation from 0 to 5 (integer)
+\paragraph{grade} A general appreciation from 0 to 5 stars(integer)
 \paragraph{review} An optional description of the review
 
 \end{document}
