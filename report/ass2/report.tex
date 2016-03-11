@@ -15,9 +15,6 @@
 \begin{document}
 \maketitle
 
-\todo{read over this fcking shit}
-\todo{RATING owns a RECORD (not the other way around) => RECORD::rating is optional}
-
 \section{Introduction}
 
 Our application will help users to share and rate their favorite locations and tracks for exercises of all sorts. Users will interact in three ways : 
@@ -100,12 +97,12 @@ of a track, exercising devices, or even sport halls and public infrastructures.
 
 
 \subsection{Record}
-When a user goes for a run on a track included in the databse, he can record his
+When a user goes for a run on a track included in the database, he can record his
 performance and provide an optional rating.
 
 \paragraph{id} Its identifier (integer)
 \paragraph{start\_time, end\_time} The beginning and the end of the activity (datetime)
-\paragraph{calories} The number of calories spent  (float). We could approximate this number with the user's personal data, or rely on external services like smartphone and health oriented devices if possible.
+\paragraph{calories} The number of calories spent (float). We could approximate this number with the user's personal data, or rely on external services like smartphone and health oriented devices if possible.
 \paragraph{track} The track used
 \paragraph{user} The user who made the activity
 \paragraph{activity\_type} The kind of activity (see below)
@@ -123,7 +120,7 @@ our database also lists different activity types.
 User can optionally provide ratings for their records, and exercises spots.
 
 \paragraph{id} Its identifier (integer)
-\paragraph{grade} A general appreciation from 0 to 5 stars(integer)
-\paragraph{review} An optional description of the review
+\paragraph{grade} A general appreciation from 0 to 5 stars (integer)
+\paragraph{review} An optional description of the review (string)
 
 \end{document}
