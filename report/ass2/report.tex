@@ -5,7 +5,9 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
-\usepackage{url}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{fullpage}
 
 \title{Open Information Systems\\Assignement part 2 }
 \author{Matteo Marra, Antoine Carpentier, Titouan Christophe, Bruno Rocha Pereira}
@@ -15,7 +17,6 @@
 
 \todo{read over this fcking shit}
 \todo{RATING owns a RECORD (not the other way around) => RECORD::rating is optional}
-\todo{add more examples of exercises spot, exercise rating and rating. BADAAAASSSS}
 
 \section{Introduction}
 
@@ -27,26 +28,12 @@ Our application will help users to share and rate their favorite locations and t
     \item Record and share spots where they exercise along tracks
 \end{enumerate}
 
-We first describe the conceptual schema of our database. The following sections develop each of the three points above.
-
-\section{Description of the database}
-
-The \textbf{USER} entity describe a user. The user has a \textbf{records} attribute which relates to \textbf{RECORD} and a \textbf{exercise\_ratings} which relates to \textbf{EXERCISE\_RATING} (more on that later). They also have the \textbf{weight}, \textbf{height}, \textbf{birth\_year} and \textbf{male} attributes used to compute their physical shape and calories burn. The two latter attributes are used to determine the age and gender of the user.
-
-The \textbf{EXERCISE\_SPOT} entity describes a spot along a track. Its \textbf{geometry} attribute is a list of spatial coordinates managed by the PostgreSQL plugin PostGIS (\url{http://postgis.net}). This data will be retrieved from the user's device in the GPX file format (\url{http://www.topografix.com/gpx.asp}). It has a \textbf{rating} attribute related to an \textbf{EXERCISE\_RATING}.
-
-The \textbf{EXERCISE\_RATING} entity describes the rating that a \textbf{USER} gives to an \textbf{EXERCISE\_SPOT}.The \textbf{grade} attribute is a scale of 0 to 5 and the optional \textbf{review} is a short description/explaination of the rating.
-
-The \textbf{TRACK} entity describes a track. Its \textbf{geometry} attribute is similar to the one of \textbf{EXERCISE\_SPOT}. Its \textbf{length} attribute is computed in the database during the creation of a track and stored.
-
-The \textbf{TAG} entity describes a tag (i.e. a keyword) related to a track. The \textbf{TAGGED} entity is the link between a \textbf{TRACK} and a \textbf{TAG} because the relation between \textbf{TAG} and \textbf{TRACK} is many-to-many.
-
-The \textbf{RECORD} entity describes the route of a user along a \textbf{TRACK}. It has the \textbf{start\_time} and \textbf{end\_time} self-explained attributes. The \textbf{activity\_type} attribute relates to the type of activity (running, walking...). The \textbf{calories} attribute is computed in the database when the user has finished based on the \textbf{activity\_type}, the \textbf{length} of the \textbf{track} and the \textbf{weight}, \textbf{height}, age and gender of the user. The \textbf{rating} attribute relates to a \textbf{RATING} working the same way as an \textbf{EXERCISE\_RATING}.
+The following sections develop each of the three points above, then we discuss
+the database organization.
 
 \section{Tracks}
 
 When a user wants to record its use of a new or existing track, our application will track its movement and record the starting and ending time. The user will have to specify which activity type he is doing (e.g. running, biking...) and optionally rate their record (with a grade and a review). Our application will be able to determine if the user is using a new track, in which case, the application will record it automatically.
-\todo{how to display tracks ? on a map ?}
 
 The length of the track will be computed only once when the user saves and stored in the database for performance issues. It will indeed never change and should be stored even if it redundant.
 
@@ -58,5 +45,81 @@ Users will be able to tag tracks with keywords and search tracks based on these 
 
 Along the tracks, users will be able to specify spots where they exercise (a specific location where they practice a sport or a part of a track that they like). They will be allowed to rate these spots with a grade and an optional review to permit other users to discover these spots.
 When a user views a specific track, the spots will be displayed along their ratings.
+
+\section{Description of the database}
+
+\subsection{Implementation}
+We use PostgreSQL\footnote{\url{http://www.postgresql.org/}} with the PostGis\footnote{\url{http://postgis.net/}} geographic extension as our database engine.
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{er-diagram.png}
+    \caption{Entity Relationship diagram}
+\end{figure}
+
+
+\subsection{User}
+A user contribute to the information system by creating an account and providing
+some information about its body. These informations are used to approximate the
+number of calories spent by users on different tracks.
+
+\paragraph{id} For now, we suppose that a user only has an unique identifier (integer)
+\paragraph{weight} Its weight, in kg (integer)
+\paragraph{height} Its height, in cm (integer)
+\paragraph{male} Indicate whether the user is female (\texttt{false}) or male (\texttt{true})
+
+
+\subsection{Track}
+The central model of our database is a \textbf{Track}, which consists of:
+
+\paragraph{id} Its identifier (integer)
+\paragraph{geometry} A geographic linestring of gps records (latitude, longitude, elevation)
+\paragraph{length} Its length in meters (float)
+
+Using gps recorders, User can create geographic traces of their activities on
+their smartphones and upload them to our information system. For example a GPX\footnote{\url{http://www.topografix.com/gpx.asp}}
+file importer might be implemented.
+
+
+\subsection{Tag}
+Users can then add tags to the tracks, which are simply strings to quickly find
+tracks according to the user mood.
+
+
+\subsection{Exercice Spot}
+All along these tracks, users could also insert informations about the exercises
+point they find. An exercice point is a large notion including special variations
+of a track, exercising devices, or even sportshalls and public infrastructures.
+
+\paragraph{id} Its identifier (integer)
+\paragraph{geometry} A collection of geographic features (points, lines, etc...)
+\paragraph{track} The track this exercise spot belongs to
+
+
+\subsection{Record}
+When a user go for a run on a track included in the databse, he can record his
+performance and provide an optional rating.
+
+\paragraph{id} Its identifier (integer)
+\paragraph{start\_time, end\_time} The beginning and the end of the activity (datetime)
+\paragraph{calories} The number of calories spent  (float). We could approximate this number with the user's personal data, or rely on external services like smartphone and health oriented devices if possible.
+\paragraph{track} The track used
+\paragraph{user} The user who made the activity
+\paragraph{activity\_type} The kind of activity (see below)
+
+
+\subsection{Activity Type}
+As users might bike, run, walk, and have other exercise activities on the tracks,
+our database also lists different activity types.
+
+\paragraph{id} Its identifier (integer)
+\paragraph{name} The activity type name (string)
+
+
+\subsection{Ratings}
+User can optionally provide ratings for their records, and exercises spots.
+
+\paragraph{id} Its identifier (integer)
+\paragraph{grade} A general appreciation from 0 to 5 (integer)
+\paragraph{review} An optional description of the review
 
 \end{document}
