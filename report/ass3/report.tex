@@ -1,0 +1,72 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{fullpage}
+\usepackage{titling}
+
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large\end{center}}
+}
+
+\title{\textbf{Open Information Systems\\Assignement part 2}}
+\subtitle{2015-2016 Vrije Universiteit Brussel\\Responsible tutor : Christophe Debruyne - chrdebru@vub.ac.be}
+\author{\textbf{Team Trackerspace}\\Matteo Marra - mmarra@vub.ac.be - 0525999 - 1M Comp Sci Soft\\Antoine Carpentier - antcarpe@vub.ac.be - 0529527 - 1M Comp Sci AI\\Titouan Christophe - tichrist@vub.ac.be - 0529190 - 1M Comp Sci Soft\\Bruno Rocha Pereira - brochape@vub.ac.be - 0529512 - 1M Comp Sci Soft}
+
+\begin{document}
+
+\maketitle
+
+\section{Abstract}
+\section{Introduction}
+
+Our application will help users to share and rate their favorite locations and tracks for exercises of all sorts. Users will interact in three ways : 
+
+\begin{enumerate}
+    \item Record and share tracks (where they run, bike...)
+    \item Tag those tracks with specific keywords for other users to discover them
+    \item Record and share spots where they exercise along tracks
+\end{enumerate}
+
+The following document describes the process of the development of a ontology common with all the other groups. It includes the difficulties we encountered during this process and the changes that were applied to our model in order to achieve a better interoperability.
+
+
+\todo{Check if more is needed}
+
+
+\section{Elaboration of the ontology}
+Due to the high number of students that had to take part in the realisation of the main ontology, a meeting on Slack\footnote{https://ontology-ois.slack.com} was organized. The first meeting there lead, after a challenging discussion, to the first and only definition present in the ontology common to food and exercise : "A calorie is a unit of energy, it is gained by eating and lost during physical activity. A calorie equals 4.184 Joules." 
+
+After the main ontolody was defined, we all decided to split into two groups. The first group was composed by the four groups working on the \textit{exercise ontology}. The second one was working on the \textit{food ontology}. Both groups discussed their ontologies on separate channels on Slack, namely \texttt{\#exercise} and \texttt{\#food}.
+
+Regarding the exercise group, we immediately started working on common definitions such as \textit{workout}. It was decided after a short discussion that it would be more suitable for each group to first define every one of the terms appearing in their application.  Therefore, every group shared a glossary and a diagram of their model. Another meeting was scheduled two days later to merge and adapt the definitions that would later appear in the \textit{exercise ontology}. During this meeting, at least one member of each group was present on the Slack channel to avoid any bias. It was implicitely decided not to have every member of each group connected in order to avoid confusion and overlapping discussions. At the end of the meeting, all the common entities were decided and defined and the \textit{exercise ontology} was thus settled.
+
+The last meeting happened five days later in one of the computer rooms. Two members of each group were present and the ontology was ported to Webprotégé \footnote{http://starpc14.vub.ac.be:8080/webprotege/#Edit:projectId=0f54f43f-f27d-46f0-a5bc-de5e7574ab98}. 
+\todo{CHECK WEBPROTEGE}
+
+\subsection{Difficulties}
+The first difficulty all the groups encountered appeared while searching for the common definition for "Calorie". It was difficult to synchronize different opinions and ideas with so much people and it took several hours to reach a common definition everybody agreed with.
+
+
+Not everyone had the same entities
+our approach on the exercise was different (not only workouts, We didn't consider the muscles)
+No exercise record
+No "wrapper" for exercices and track records
+\subsection{Changes}
+Add workout
+Heart rate?
+exercise record
+These changes were applied in order to fit the ontology and were suitable add-ons to our application. No change that would make the application loose its main purpose were made.
+%%NEW ER DIAGRAM
+\subsection{Contributions}
+\section{Conclusion}
+
+
+\end{document}
