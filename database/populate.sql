@@ -53,11 +53,13 @@ INSERT INTO exercise_rating ("grade", "review", "exercise_spot_id", "user_id") V
     ('3', 'Too much people waiting for the spot', '1', '2');
 
 
-INSERT INTO record ("id", "start_time", "end_time", "calories", "track_id", "activity_type_id", "user_id") VALUES
-    ('1', '2012-12-21 11:11:11', '2012-12-21 13:01:44', '458', '10', '1', '1'),
-    ('2', '2013-12-21 12:12:12', '2013-12-21 13:01:44', '841', '3', '2', '2'),
-    ('3', '2014-12-21 13:13:13', '2014-12-21 14:01:44', '547', '7', '2', '3'),
-    ('4', '2015-11-13 17:38:14', '2015-11-13 18:42:21', '502', '4', '4', '4');
+INSERT INTO workout ("id") VALUES ('1'), ('2'), ('3'), ('4');
+
+INSERT INTO record ("id", "workout_id", "heart_rate", "start_time", "end_time", "calories", "track_id", "activity_type_id", "user_id") VALUES
+    ('1', '1', '117', '2012-12-21 11:11:11', '2012-12-21 13:01:44', '458', '10', '1', '1'),
+    ('2', '2', '128', '2013-12-21 12:12:12', '2013-12-21 13:01:44', '841', '3', '2', '2'),
+    ('3', '3', '173', '2014-12-21 13:13:13', '2014-12-21 14:01:44', '547', '7', '2', '3'),
+    ('4', '4', '98', '2015-11-13 17:38:14', '2015-11-13 18:42:21', '502', '4', '4', '4');
 
 
 INSERT INTO rating ("grade", "review", "record_id") VALUES
