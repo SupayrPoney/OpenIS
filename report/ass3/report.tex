@@ -63,7 +63,22 @@ We did not encounter any problem in the inter-group communication.
 Bruno Rocha Pereira and Matteo Marra participated to the ontology meetings after consulting with the rest of the group and reporting in group meetings which choices were made. 
 Titouan Christophe and Antoine Carpentier took care of defining our new model and applying the changes we needed. 
 
-\subsection{Changes}
+\subsection{Changes to the model}
+We made a few minor changes to our model in order to fit the agreed ontology. These changes have no impact on our application purpose and scope.
+
+\subsubsection{Add a Workout entity}
+The elaborated ontology specifies a workout entity, which model a user that performs a sport session. We therefore added a \texttt{Workout} to our database, which refers to tracks a user has run and the exercices he made during a workout session. This is simply a wrapper for our specialized activity types.
+
+\subsubsection{Exercise session}
+The informations we recorded for exercices spot in our database only included the user rating. We therefore added the \texttt{Exercise\_Session} entity, which models the fact that a user perform a certain number of \textbf{repetitions} of an exercise at an exercise spot, along with its \textbf{heart rate} during the session, in order to comply with the workout ontology. The exercise session is an implementation for the exercise spots of our \texttt{Record} entity (which was for tracks).
+
+
+\begin{figure}[!H]
+  \center
+  \includegraphics[width=\textwidth]{er.png}
+  \caption{\label{fig:new-er} The updated Entity/Relationship diagram of our model}
+\end{figure}
+
 %Add workout
 %Heart rate?
 %exercise record (it's just another 'implementation' of exercise defined in the ontology (along with record)
