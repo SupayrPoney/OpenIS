@@ -16,7 +16,7 @@
     \begin{center}\large\end{center}}
 }
 
-\title{\textbf{Open Information Systems\\Assignement part 2}}
+\title{\textbf{Open Information Systems\\Assignment part 3}}
 \subtitle{2015-2016 Vrije Universiteit Brussel\\Responsible tutor : Christophe Debruyne - chrdebru@vub.ac.be}
 \author{\textbf{Team Trackerspace}\\Matteo Marra - mmarra@vub.ac.be - 0525999 - 1M Comp Sci Soft\\Antoine Carpentier - antcarpe@vub.ac.be - 0529527 - 1M Comp Sci AI\\Titouan Christophe - tichrist@vub.ac.be - 0529190 - 1M Comp Sci Soft\\Bruno Rocha Pereira - brochape@vub.ac.be - 0529512 - 1M Comp Sci Soft}
 
@@ -46,10 +46,22 @@ Due to the high number of students that had to take part in the realisation of t
 
 After the main ontolody was defined, we all decided to split into two groups. The first group was composed by the four groups working on the \textit{exercise ontology}. The second one was working on the \textit{food ontology}. Both groups discussed their ontologies on separate channels on Slack, namely \texttt{\#exercise} and \texttt{\#food}.
 
-Regarding the exercise group, we immediately started working on common definitions such as \textit{workout}. It was decided after a short discussion that it would be more suitable for each group to first define every one of the terms appearing in their application.  Therefore, every group shared a glossary and a diagram of their model. Another meeting was scheduled two days later to merge and adapt the definitions that would later appear in the \textit{exercise ontology}. During this meeting, at least one member of each group was present on the Slack channel to avoid any bias. It was implicitely decided not to have every member of each group connected in order to avoid confusion and overlapping discussions. At the end of the meeting, all the common entities were decided and defined and the \textit{exercise ontology} was thus settled.
+Regarding the exercise group, we immediately started working on common definitions such as \textit{workout}. It was decided after a short discussion that it would be more suitable for each group to first define every one of the terms appearing in their application.  Therefore, every group shared a glossary and a diagram of their model. Another meeting was scheduled two days later to merge and adapt the definitions that would later appear in the \textit{exercise ontology}. 
+During this meeting, at least one member of each group was present on the Slack channel to avoid any bias. It was implicitely decided not to have every member of each group connected in order to avoid confusion and overlapping discussions. 
+We decided to proceed concept by concept, starting from a definition of \texttt{Exercise} and its properties (such as \texttt{Heart Rate}, \texttt{Equipment}, \texttt{Duration}, \texttt{Difficulty}, \texttt{Rating}, \texttt{Muscle Group}, \texttt{Repetition}).
+In order to link the exercises with the global ontology, we decided to put the number of calories burned as property of an \texttt{Exercise}.
+
+\texttt{Workout} was then defined to link an exercise session, composed by many \texttt{Exercise}, user and date.
+The last concept defined during that meeting was \texttt{User} as the account of the user using the application.
+At the end of the meeting, all the common entities were decided and defined.
 
 The last meeting happened five days later in one of the computer rooms. Two members of each group were present and the ontology was ported to Webprotégé \footnote{http://starpc14.vub.ac.be:8080/webprotege/\#Edit:projectId=0f54f43f-f27d-46f0-a5bc-de5e7574ab98}. 
-\todo{CHECK WEBPROTEGE}
+This operation has been done from a unique computer in order to avoid concurrency problems, with all members present to the meeting participating to this process.
+In this meeting we decided that some concept we defined would refer to an already existing ontology, namely \texttt{Person}\footnote{http://dbpedia.org/ontology/Person} and \texttt{Muscle group}\footnote{http://dbpedia.org/page/Category:Muscles\_by\_location}.
+
+Later on, during the lab session, it was decided to change \texttt{User} to \texttt{UserAccount}, linking it with a \texttt{ownedBy} property to \texttt{Person}.
+
+The ontology was then checked via the OOPS platform and the group 3 took care of correcting all of the warnings. 
 
 \subsection{Difficulties}
 The first difficulty all the groups encountered appeared while searching for the common definition for "Calorie". It was difficult to synchronize different opinions and ideas with so much people and it took several hours to reach a common definition everybody agreed with.
@@ -59,9 +71,9 @@ In this phase the main difficulty our group encountered was that our application
 We decided that, in order to have a more suitable ontology for all the groups, it was better to slightly change our model, adding some supplementary functionalities that anyway wouldn't have changed the purpose of our application. 
 We agreed to add to the ontology the concept of \texttt{Workout} and \texttt{Heart\_Rate} that weren't included in our model but weren't difficult to include. \todo{check my english please}
 
+Our entity \texttt{Exercise\_Spot} wasn't present in any of the other groups, and together with the other groups we decided to add the concept \texttt{Equipment} in the ontology.
+
 We didn't encounter problems in the inter-group communication. 
-Bruno Rocha Pereira and Matteo Marra participated to the ontology meetings after consulting with the rest of the group and reporting in group meetings which were the choice made. 
-Titouan Christophe and Antoine Carpentier took care of defining our new model and applying the changes we needed. 
 
 \subsection{Changes}
 %Add workout
@@ -71,6 +83,8 @@ Titouan Christophe and Antoine Carpentier took care of defining our new model an
 %Say that workout is just a wrapper for exercises/traks.
 %%NEW ER DIAGRAM
 \subsection{Contributions}
+Bruno Rocha Pereira and Matteo Marra participated to the ontology meetings after consulting with the rest of the group and reporting in group meetings which were the choice made. 
+Titouan Christophe and Antoine Carpentier took care of defining our new model and applying the changes we needed. 
 \section{Conclusion}
 
 
