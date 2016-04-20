@@ -10,6 +10,7 @@
 \usepackage{fullpage}
 \usepackage{titling}
 \usepackage{float}
+\usepackage{rotating}
 
 \newcommand{\subtitle}[1]{%
   \posttitle{%
@@ -76,7 +77,7 @@ Our entity \texttt{Exercise\_Spot} wasn't present in any of the other groups, an
 We did not encounter any problem in the inter-group communication. 
 
 \subsection{Changes to the model}
-We made a few minor changes to our model in order to fit the agreed ontology. These changes have no impact on our application purpose and scope.
+We made a few minor changes to our model in order to fit the agreed ontology. These changes have no impact on our application purpose and scope. Our new model is depicted in Figure \ref{fig:new-er}. We also give our previous version in Figure \ref{fig:old-er} for comparison.
 
 \subsubsection{Add a Workout entity}
 The elaborated ontology specifies a workout entity, which model a user that performs a sport session. We therefore added a \texttt{Workout} to our database, which refers to tracks a user has run and the exercices he made during a workout session. This is simply a wrapper for our specialized activity types.
@@ -88,11 +89,11 @@ The informations we recorded for exercices spot in our database only included th
 Finally, to be fully compliant with th esport ontology we added an heart rate field to the \texttt{Record} entity, which models the average heart rate a user had during its running session.
 
 
-\begin{figure}[h!]
+\begin{sidewaysfigure}[h!]
   \center
   \includegraphics[width=\textwidth]{er.png}
   \caption{\label{fig:new-er} The updated Entity/Relationship diagram of our model}
-\end{figure}
+\end{sidewaysfigure}
 
 \begin{figure}[h!]
   \center
