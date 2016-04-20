@@ -82,8 +82,10 @@ We made a few minor changes to our model in order to fit the agreed ontology. Th
 The elaborated ontology specifies a workout entity, which model a user that performs a sport session. We therefore added a \texttt{Workout} to our database, which refers to tracks a user has run and the exercices he made during a workout session. This is simply a wrapper for our specialized activity types.
 
 \subsubsection{Exercise session}
-The informations we recorded for exercices spot in our database only included the user rating. We therefore added the \texttt{Exercise\_Session} entity, which models the fact that a user perform a certain number of \textbf{repetitions} of an exercise at an exercise spot, along with its \textbf{heart rate} during the session, in order to comply with the workout ontology. The exercise session is an implementation for the exercise spots of our \texttt{Record} entity (which was for tracks).
+The informations we recorded for exercices spot in our database only included the user rating. Our application had the \texttt{Record} entity that modelled a user running along a track, and we only had an optional \texttt{Rating} for the exercises spots he encounters along its track. We therefore added the \texttt{Exercise\_Session} entity, which models the fact that a user runs som tracks, and perform a certain number of \textbf{repetitions} of an exercise at an exercise spot, along with its \textbf{heart rate} during the session, in order to comply with the workout ontology. The exercise session is an implementation for the exercise spots of our \texttt{Record} entity (which was for tracks).
 
+\subsubsection{Heart rate in Record}
+Finally, to be fully compliant with th esport ontology we added an heart rate field to the \texttt{Record} entity, which models the average heart rate a user had during its running session.
 
 
 \begin{figure}[h!]
