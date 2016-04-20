@@ -9,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage{fullpage}
 \usepackage{titling}
+\usepackage{float}
 
 \newcommand{\subtitle}[1]{%
   \posttitle{%
@@ -84,11 +85,19 @@ The elaborated ontology specifies a workout entity, which model a user that perf
 The informations we recorded for exercices spot in our database only included the user rating. We therefore added the \texttt{Exercise\_Session} entity, which models the fact that a user perform a certain number of \textbf{repetitions} of an exercise at an exercise spot, along with its \textbf{heart rate} during the session, in order to comply with the workout ontology. The exercise session is an implementation for the exercise spots of our \texttt{Record} entity (which was for tracks).
 
 
-\begin{figure}[!H]
+
+\begin{figure}[h!]
   \center
   \includegraphics[width=\textwidth]{er.png}
   \caption{\label{fig:new-er} The updated Entity/Relationship diagram of our model}
 \end{figure}
+
+\begin{figure}[h!]
+  \center
+  \includegraphics[width=\textwidth]{er-old.png}
+  \caption{\label{fig:old-er} The previous version of our Entity/Relationship diagram, for comparison with Figure \ref{fig:new-er}}
+\end{figure}
+
 
 %Add workout
 %Heart rate?
