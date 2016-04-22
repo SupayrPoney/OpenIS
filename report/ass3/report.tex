@@ -27,7 +27,7 @@
 \maketitle
 
 \section{Abstract}
-This project consists in creating an ontology for several projects related to exercises or food. Each group created a database model for their application and everyone must come to an agreement to create a common ontology.
+This project consists in creating an ontology for several projects related to exercises or food. Each group created a database model for their application and all groups must come to an agreement to create a common ontology.
 
 \section{Introduction}
 
@@ -40,9 +40,6 @@ Our application will help users to share and rate their favorite locations and t
 \end{enumerate}
 
 The following document describes the process of the development of a ontology common with all the other groups. It includes the difficulties we encountered during this process and the changes that were applied to our model in order to achieve a better interoperability.
-
-
-\todo{Check if more is needed}
 
 
 \section{Elaboration of the ontology}
@@ -88,7 +85,7 @@ The elaborated ontology specifies a workout entity, which model a user that perf
 The informations we recorded for exercices spot in our database only included the user rating. Our application had the \texttt{Record} entity that modelled a user running along a track, and we only had an optional \texttt{Rating} for the exercises spots he encounters along its track. We therefore added the \texttt{Exercise\_Session} entity, which models the fact that a user runs som tracks, and perform a certain number of \textbf{repetitions} of an exercise at an exercise spot, along with its \textbf{heart rate} during the session, in order to comply with the workout ontology. The exercise session is an implementation for the exercise spots of our \texttt{Record} entity (which was for tracks).
 
 \subsubsection{Heart rate in Record}
-Finally, to be fully compliant with th esport ontology we added an heart rate field to the \texttt{Record} entity, which models the average heart rate a user had during its running session.
+Finally, to be fully compliant with the exercise ontology we added an heart rate field to the \texttt{Record} entity, which models the average heart rate of a user during its running/exercising session.
 
 
 \begin{sidewaysfigure}[h!]
@@ -103,13 +100,6 @@ Finally, to be fully compliant with th esport ontology we added an heart rate fi
   \caption{\label{fig:old-er} The previous version of our Entity/Relationship diagram, for comparison with Figure \ref{fig:new-er}}
 \end{figure}
 
-
-%Add workout
-%Heart rate?
-%exercise record (it's just another 'implementation' of exercise defined in the ontology (along with record)
-%These changes were applied in order to fit the ontology and were suitable add-ons to our application. No change that would make the application loose its main purpose were made.
-%Say that workout is just a wrapper for exercises/traks.
-%%NEW ER DIAGRAM
 \subsection{Contributions}
 Bruno Rocha Pereira and Matteo Marra participated to the ontology meetings after consulting with the rest of the group and reporting in group meetings which were the choice made. 
 Titouan Christophe and Antoine Carpentier took care of defining our new model and applying the changes we needed. 
