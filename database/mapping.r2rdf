@@ -1,0 +1,43 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix ex: <http://WEBPROTEGE (come back soon ...)>
+
+<#RecordDurationQuery>
+    rr:sqlQuery """
+    SELECT (end_time - start_time) AS duration,
+           rating,
+           track_id,
+           name AS has_type
+    FROM record
+    LEFT JOIN activity_type ON activity_type_id = activity_type.id;
+    """.
+
+<#ExerciseTripleMap>
+    rr:TriplesMap;
+
+    rr:logicalTable [rr:tableName "Exercise"];
+
+    rr:subjectMap [
+        rr:template "http://UUURRRLLL/Exercise/{ID}";
+        rr:class ex:exercise;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:Difficulty;
+        rr:objectMap [rr:column "rating"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:Duration;
+        rr:objectMap [rr:column "duration"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:Equipment;
+        rr:objectMap [rr:column "track_id"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:HasType;
+        rr:objectMap [rr:column "has_type"];
+    ];
+.
