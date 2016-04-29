@@ -1,0 +1,30 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{url}
+
+\title{Open Information Systems\\Assignement part 2 }
+\author{Matteo Marra, Antoine Carpentier, Titouan Christophe, Bruno Rocha Pereira}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+This document reports the change in the database that were operated after a feedback from the teacher an proposes our non-trivial demonstrator.
+
+\section{Reverts of the database}
+
+We previously made some changes to the database in order to fit the ontology. Some of those changes were not justified and reproached to us and had to be reverted. In that optic, we removed the concepts \texttt{Workout} and \texttt{Heartrate}. However, the the concept \texttt{Exercice Workout} was kept in or model since it made sense in our application and wasn't added to fit the ontology.
+
+\section{Proposition for the non-trivial Demonstrator}
+
+Our demonstrator will provide an interface with a map where users will be able to see all tracks in the displayed area, as well as the exercises spots along these tracks. It will be possible to find tracks by tags and activity type. Moreover, given a track, a user will be able to find related exercises: exercises spots along the track, crossing or nearby tracks, or similar tracks by activity type or tags.
+
+Finally, users will be able to contribute to the information system, by uploading GPS traces (for example in the GPX file format) of the tracks they ran, tag them and signal existing exercise spots, or record that they run along an existing track or exercise spot.
+
+
+\end{document}
