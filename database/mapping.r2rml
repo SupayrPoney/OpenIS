@@ -1,29 +1,22 @@
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
-@prefix ex: <http://WEBPROTEGE (come back soon ...)>
+@prefix ex: <http://exercice.ontology#>.
 
-<#RecordDurationQuery>
-    rr:sqlQuery """
-    SELECT (end_time - start_time) AS duration,
-           rating,
+<#ExerciseTripleMap>
+    rdf:type rr:TriplesMap;
+
+    rr:logicalTable [rr:sqlQuery """
+    SELECT record.id AS ID,
+           (end_time - start_time) AS duration,
            track_id,
            name AS has_type
     FROM record
     LEFT JOIN activity_type ON activity_type_id = activity_type.id;
-    """.
+    """];
 
-<#ExerciseTripleMap>
-    rr:TriplesMap;
-
-    rr:logicalTable [rr:tableName "Exercise"];
-
+    # Could also put Exercise-track and Exercise-spot endpoints
     rr:subjectMap [
-        rr:template "http://UUURRRLLL/Exercise/{ID}";
-        rr:class ex:exercise;
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ex:Difficulty;
-        rr:objectMap [rr:column "rating"];
+        rr:template "http://localhost/exercise/{ID}/";
+        rr:class ex:Exercise;
     ];
 
     rr:predicateObjectMap [
