@@ -1,4 +1,8 @@
+# World-class definitions
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix person: <http://dbpedia.org/ontology/Person#>.
+
+# Group aggreed definitions
 @prefix ex: <http://exercice.ontology#>.
 
 <#ExerciseTripleMap>
@@ -32,5 +36,45 @@
     rr:predicateObjectMap [
         rr:predicate ex:HasType;
         rr:objectMap [rr:column "has_type"];
+    ];
+.
+
+<#PersonTripleMap>
+    rdf:type rr:TriplesMap;
+
+    rr:logicalTable [rr:sqlQuery """
+    SELECT id AS ID, weight, height, CASE WHEN male then 'male' ELSE 'female' END AS sex FROM public.user;
+    """];
+
+    rr:subjectMap [
+        rr:template "http://localhost/person/{ID}";
+        rr:class ex:Person;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate person:weight;
+        rr:objectMap [rr:column "weight"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate person:height;
+        rr:objectMap [rr:column "height"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate person:sex;
+        rr:objectMap [rr:column "sex"];
+    ];
+.
+
+<#UserTripleMap>
+    rdf:type rr:TriplesMap;
+    rr:logicalTable [rr:sqlQuery """
+    SELECT id AS ID FROM public.user
+    """];
+
+    rr:subjectMap [
+        rr:template "http://localhost/user/{ID}";
+        rr:class ex:User;
     ];
 .
