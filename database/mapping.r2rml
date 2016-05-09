@@ -39,6 +39,7 @@
     ];
 .
 
+
 <#PersonTripleMap>
     rdf:type rr:TriplesMap;
 
@@ -67,6 +68,7 @@
     ];
 .
 
+
 <#UserTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
@@ -75,6 +77,9 @@
 
     rr:subjectMap [
         rr:template "http://localhost/user/{ID}";
-        rr:class ex:User;
+        rr:class ex:UserAccount;
     ];
 .
+
+
+
