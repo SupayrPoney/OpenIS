@@ -1,9 +1,11 @@
 # World-class definitions
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
 @prefix person: <http://dbpedia.org/ontology/Person#>.
+@prefix geo: <http://www.opengis.net/ont/geosparql#>.
 
-# Group aggreed definitions
+# Group aggreed definitions (Still need to put the webprotoge URL...)
 @prefix ex: <http://exercice.ontology#>.
+@prefix tr: <http://openis.ititou.be/ont#>.
 
 <#ExerciseTripleMap>
     rdf:type rr:TriplesMap;

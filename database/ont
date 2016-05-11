@@ -6,7 +6,7 @@
 @prefix ex:<http://openis.ititou.be/ont#>.
 
 ex:Track a owl:Class;
-    rdfs:subclassOf geo:Feature;
+    rdfs:subclassOf geo:Feature .
 
 ex:ExerciseSpot a owl:Class;
-    rdfs:subclassOf geo:Feature;
+    rdfs:subclassOf geo:Feature .
