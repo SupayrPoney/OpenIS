@@ -84,4 +84,24 @@
 .
 
 
+<#TrackTripleMap>
+    rdf:type rr:TriplesMap;
+    rr:logicalTable [rr:tableName "track"];
+
+    rr:subjectMap [
+        rr:template "http://localhost/track/{id}";
+        rr:class tr:Track;
+    ];
+.
+
+<#ExerciseSpotTripleMap>
+    rdf:type rr:TriplesMap;
+    rr:logicalTable [rr:tableName "exercise_spot"];
+
+    rr:subjectMap [
+        rr:template "http://localhost/exercise_spot/{id}";
+        rr:class tr:ExerciseSpot;
+    ];
+.
+
 
