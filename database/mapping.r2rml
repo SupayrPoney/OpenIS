@@ -1,5 +1,7 @@
 # World-class definitions
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
+@prefix rrx: <http://www.w3.org/ns/r2rml-ext#>.
+@prefix rrxf: <http://www.w3.org/ns/r2rml-ext/functions/def/>.
 @prefix person: <http://dbpedia.org/ontology/Person#>.
 @prefix geo: <http://www.opengis.net/ont/geosparql#>.
 
@@ -91,6 +93,17 @@
     rr:subjectMap [
         rr:template "http://localhost/track/{id}";
         rr:class tr:Track;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:hasGeometry;
+        rr:objectMap [
+            rr:class geo:wktLiteral;
+            rrx:transformation [
+                rrx:function rrxf:asWKT;
+                rrx:argumentMap [rr:column "geometry";];
+            ];
+        ];
     ];
 .
 
