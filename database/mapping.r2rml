@@ -1,4 +1,5 @@
 # World-class definitions
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
 @prefix rrx: <http://www.w3.org/ns/r2rml-ext#>.
 @prefix rrxf: <http://www.w3.org/ns/r2rml-ext/functions/def/>.
@@ -14,7 +15,7 @@
 
     rr:logicalTable [rr:sqlQuery """
     SELECT record.id AS ID,
-           (end_time - start_time) AS duration,
+           extract('epoch' FROM (end_time - start_time)) AS duration,
            track_id,
            name AS has_type
     FROM record
@@ -88,7 +89,9 @@
 
 <#TrackTripleMap>
     rdf:type rr:TriplesMap;
-    rr:logicalTable [rr:tableName "track"];
+    rr:logicalTable [rr:sqlQuery """
+    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, length FROM track;
+    """];
 
     rr:subjectMap [
         rr:template "http://localhost/track/{id}";
@@ -97,23 +100,24 @@
 
     rr:predicateObjectMap [
         rr:predicate geo:hasGeometry;
-        rr:objectMap [
-            rr:class geo:wktLiteral;
-            rrx:transformation [
-                rrx:function rrxf:asWKT;
-                rrx:argumentMap [rr:column "geometry";];
-            ];
-        ];
+        rr:objectMap [rr:column "geometry"];
     ];
 .
 
 <#ExerciseSpotTripleMap>
     rdf:type rr:TriplesMap;
-    rr:logicalTable [rr:tableName "exercise_spot"];
+    rr:logicalTable [rr:sqlQuery """
+    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, track_id FROM exercise_spot;
+    """];
 
     rr:subjectMap [
         rr:template "http://localhost/exercise_spot/{id}";
         rr:class tr:ExerciseSpot;
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate geo:hasGeometry;
+        rr:objectMap [rr:column "geometry"];
     ];
 .
 
