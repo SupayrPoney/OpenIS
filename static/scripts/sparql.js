@@ -17,7 +17,10 @@ const SPARQL = {
     },
 
     inBoundingBox: function(lon1, lat1, lon2, lat2){
-        var points = [[lon1, lat1], [lon1, lat2], [lon2, lat2], [lon2, lat1]];
+        // Closed rectangle
+        var points = [[lon1, lat1], [lon1, lat2], [lon2, lat2], [lon2, lat1],
+                      [lon1, lat1]];
+        // Then format to WKT
         var pointStr = points.map(function(ll){return ll.join(' ')}).join(',');
         return this.sparql(
             " SELECT DISTINCT ?geom" +

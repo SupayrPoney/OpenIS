@@ -1,10 +1,10 @@
+# Query all tracks within a bounding box
+
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX sf: <http://www.opengis.net/ont/sf#>
 PREFIX ont: <http://openis.ititou.be/ont#>
-
-# Query all tracks within a bounding box
 
 SELECT DISTINCT ?geom
 WHERE {
@@ -13,7 +13,7 @@ WHERE {
 
     FILTER (
         geof:sfContains(
-            STRDT("POLYGON((51.256328723455 2.109375 , 51.88454447438394 5.9326171875, 49.94547597262476 6.7236328125,49.490876562514686 3.1640625 ,51.256328723455 2.109375))", sf:wktLiteral),
+            STRDT("POLYGON((3 50, 3 51, 5 51, 5 50, 3 50))", sf:wktLiteral),        
             STRDT(?geom, sf:wktLiteral)
         )
     ).
