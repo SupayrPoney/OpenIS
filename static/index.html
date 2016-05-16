@@ -29,14 +29,15 @@
                    .setView([50.83906, 4.35308], 13);
 
         SPARQL.allTracks()
+              .fail(function(){alert("Failed");})
               .done(function(data){
                   console.log(data);
                   var res = data.results.bindings
                   for (var i=0; i<res.length; i++){
                     console.log(res[i].geom.value);
                     L.geoJson(parse(res[i].geom.value)).addTo(map);
-                  }})
-              .fail(function(){alert("Failed");});
+                  }
+              });
     </script>
 </body>
 </html>
