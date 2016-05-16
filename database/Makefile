@@ -1,4 +1,12 @@
-all: mapping.ttl
+all: triples.ttl
 
-%.ttl: %.r2rml
+database.ok:
+	./createdb.sh
+	touch $@
+
+triples.ttl: r2rml.ttl database.ok
 	java -cp dependency/ -jar db2triples-1.0.3-SNAPSHOT.jar -d org.postgresql.Driver -f -m r2rml -l jdbc:postgresql: -b openis -r $< -u 'openis' -p 'openis' -o $@
+
+clean:
+	rm -f database.ok triples.ttl
+	sudo -u postgres dropdb openis

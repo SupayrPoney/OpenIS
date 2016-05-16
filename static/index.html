@@ -28,16 +28,19 @@
                    .addLayer(mapboxTiles)
                    .setView([50.83906, 4.35308], 13);
 
-        SPARQL.allTracks()
-              .fail(function(){alert("Failed");})
-              .done(function(data){
-                  console.log(data);
-                  var res = data.results.bindings
-                  for (var i=0; i<res.length; i++){
-                    console.log(res[i].geom.value);
-                    L.geoJson(parse(res[i].geom.value)).addTo(map);
-                  }
-              });
+        function showTracks(sparql_query){
+            sparql_query.fail(function(){alert("Failed");})
+                        .done(function(data){
+                            var res = data.results.bindings
+                            for (var i=0; i<res.length; i++){
+                                console.log(res[i].geom.value);
+                                L.geoJson(parse(res[i].geom.value)).addTo(map);
+                            }
+                        });
+        }
+
+        showTracks(SPARQL.allTracks());
+              
     </script>
 </body>
 </html>

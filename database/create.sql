@@ -9,8 +9,7 @@ CREATE TABLE "tag" (
 
 CREATE TABLE "track" (
   "id" SERIAL PRIMARY KEY,
-  "geometry" GEOGRAPHY(LineStringZ, 4326) NOT NULL,
-  "length" REAL NOT NULL
+  "geometry" GEOGRAPHY(LineStringZ, 4326) NOT NULL
 );
 
 CREATE TABLE "exercise_spot" (
