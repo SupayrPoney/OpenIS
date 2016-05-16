@@ -90,7 +90,7 @@
 <#TrackTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
-    SELECT id, ST_AsText(geometry) AS geometry, length FROM track;
+    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, length FROM track;
     """];
 
     rr:subjectMap [
@@ -107,7 +107,7 @@
 <#ExerciseSpotTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
-    SELECT id, ST_AsText(geometry) AS geometry, track_id FROM exercise_spot;
+    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, track_id FROM exercise_spot;
     """];
 
     rr:subjectMap [
