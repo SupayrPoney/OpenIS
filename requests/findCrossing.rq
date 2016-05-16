@@ -1,4 +1,4 @@
-# Query all tracks within a bounding box
+# Query all tracks crossing a specific track
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
@@ -12,11 +12,9 @@ SELECT DISTINCT ?track ?geom
 WHERE {
     ?track rdf:type ont:Track.
     ?track geo:hasGeometry ?geom.
+    <http://localhost/track/1> geo:hasGeometry ?x.
 
     FILTER (
-        geof:sfContains(
-            STRDT("POLYGON((4.15 50, 4.15 51, 4.4 51, 4.4 50, 4.15 50))", sf:wktLiteral),        
-            STRDT(?geom, sf:wktLiteral)
-        )
+        geof:sfIntersects(STRDT(?x, sf:wktLiteral), STRDT(?geom, sf:wktLiteral))
     ).
 }
