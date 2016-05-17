@@ -21,7 +21,7 @@
            track_id,
            name AS has_type
     FROM record
-    LEFT JOIN activity_type ON activity_type_id = activity_type.id;
+    LEFT JOIN activity_type ON activity_type_id = activity_type.id
     """];
 
     # Could also put Exercise-track and Exercise-spot endpoints
@@ -41,6 +41,17 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate tr:hasTrack;
+        rr:objectMap [
+            rr:parentTriplesMap <#TrackTripleMap>;
+            rr:joinCondition [
+                rr:child "track_id";
+                rr:parent "id";
+            ];
+        ];
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate ex:HasType;
         rr:objectMap [rr:column "has_type"];
     ];
@@ -51,7 +62,7 @@
     rdf:type rr:TriplesMap;
 
     rr:logicalTable [rr:sqlQuery """
-    SELECT id AS ID, weight, height, CASE WHEN male then 'male' ELSE 'female' END AS sex FROM public.user;
+    SELECT id AS ID, weight, height, CASE WHEN male then 'male' ELSE 'female' END AS sex FROM public.user
     """];
 
     rr:subjectMap [
@@ -86,6 +97,17 @@
         rr:template "http://localhost/user/{ID}";
         rr:class ex:UserAccount;
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:OwnedByPerson;
+        rr:objectMap [
+            rr:parentTriplesMap <#PersonTripleMap>;
+            rr:joinCondition [
+                rr:child "ID";
+                rr:parent "ID";
+            ];
+        ];
+    ];
 .
 
 
@@ -94,7 +116,7 @@
     rr:logicalTable [rr:sqlQuery """
     SELECT id,
            ST_AsText(ST_Force2D(geometry::geometry)) AS geometry,
-           ST_Length(geometry)::int as length FROM track;
+           ST_Length(geometry)::int as length FROM track
     """];
 
     rr:subjectMap [
@@ -116,7 +138,7 @@
 <#ExerciseSpotTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
-    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, track_id FROM exercise_spot;
+    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, track_id FROM exercise_spot
     """];
 
     rr:subjectMap [

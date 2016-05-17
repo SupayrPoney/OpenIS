@@ -3,23 +3,32 @@
 @prefix geo: <http://www.opengis.net/ont/geosparql#>.
 @prefix xs: <http://www.w3.org/2001/XMLSchema#>.
 
-# Our application specific namespace
-@prefix ex: <http://openis.ititou.be/ont#>.
+# Group aggreed definitions (Still need to put the webprotoge URL...)
+@prefix ex: <http://exercice.ontology#>.
 
-ex:Track a owl:Class ;
+# Our custom definition, available on the internet
+@prefix tr: <http://openis.ititou.be/ont#>.
+
+tr:Track a owl:Class ;
     rdfs:subclassOf geo:Feature .
 
-ex:hasLength a owl:ObjectProperty ;
+tr:hasLength a owl:ObjectProperty ;
     rdfs:label "hasLength" ;
     rdfs:comment "The length, in meters, of a track" ;
     rdfs:range xs:integer ;
-    rdfs:domain ex:Track .
+    rdfs:domain tr:Track .
 
-ex:ExerciseSpot a owl:Class ;
+tr:ExerciseSpot a owl:Class ;
     rdfs:subclassOf geo:Feature .
 
-ex:isAlongTrack a owl:ObjectProperty ;
+tr:isAlongTrack a owl:ObjectProperty ;
     rdfs:label "isAlongTrack" ;
     rdfs:comment "The track along which the exercise spot is located" ;
-    rdfs:range ex:Track ;
-    rdfs:domain ex:ExerciseSpot .
+    rdfs:range tr:Track ;
+    rdfs:domain tr:ExerciseSpot .
+
+tr:hasTrack a owl:ObjectProperty ;
+    rdfs:label "hasTrack" ;
+    rdfs:comment "The track on which an exercise was performed" ;
+    rdfs:range tr:Track ;
+    rdfs:domain ex:Exercise.
