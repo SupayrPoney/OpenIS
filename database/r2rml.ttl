@@ -84,6 +84,17 @@
         rr:predicate person:sex;
         rr:objectMap [rr:column "sex"];
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:PersonOf;
+        rr:objectMap [
+            rr:parentTriplesMap <#UserTripleMap>;
+            rr:joinCondition [
+                rr:child "ID";
+                rr:parent "ID";
+            ];
+        ];
+    ];
 .
 
 
@@ -150,7 +161,7 @@
         rr:predicate geo:hasGeometry;
         rr:objectMap [rr:column "geometry"];
     ];
-    
+
     rr:predicateObjectMap [
         rr:predicate tr:hasTrack;
         rr:objectMap [
