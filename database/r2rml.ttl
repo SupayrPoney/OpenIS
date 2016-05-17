@@ -37,7 +37,13 @@
 
     rr:predicateObjectMap [
         rr:predicate ex:Equipment;
-        rr:objectMap [rr:column "track_id"];
+        rr:objectMap [
+            rr:parentTriplesMap <#TrackTripleMap>;
+            rr:joinCondition [
+                rr:child "track_id";
+                rr:parent "id";
+            ];
+        ];
     ];
 
     rr:predicateObjectMap [
