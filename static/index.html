@@ -34,11 +34,15 @@
         var map = L.map('map')
                    .addLayer(mapboxTiles)
                    .setView([50.83906, 4.35308], 13);
+        tracks = new L.FeatureGroup();
+        map.addLayer(tracks);
 
         function showTracks(sparql_query){
             sparql_query.fail(function(){alert("Failed");})
                         .done(function(data){
                             var res = data.results.bindings
+                            tracks = new L.FeatureGroup();
+                            map.addLayer(tracks);
                             for (var i=0; i<res.length; i++){
                                 console.log(res[i]);
                                 var col = '#' + (function co(lor){   return (lor +=
@@ -46,7 +50,7 @@
                                   && (lor.length == 6) ?  lor : co(lor); })(''); 
                                 var track = L.geoJson(parse(res[i].geom.value),{color: col});
                                 track.bindPopup("<b>Hello world!</b><br>I am a popup.");
-                                track.addTo(map);
+                                track.addTo(tracks);
                             }
                         });
         }
@@ -69,6 +73,7 @@
                 stateName: 'removeTracks',
                 icon: '<span class="cross">&cross;</span>',
                 onClick: function(control){ deleteTracks();
+                                            map.removeLayer(tracks);
                                             control.state('addTracks');
 
                     },
