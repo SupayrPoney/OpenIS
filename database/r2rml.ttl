@@ -150,6 +150,17 @@
         rr:predicate geo:hasGeometry;
         rr:objectMap [rr:column "geometry"];
     ];
+    
+    rr:predicateObjectMap [
+        rr:predicate tr:hasTrack;
+        rr:objectMap [
+            rr:parentTriplesMap <#TrackTripleMap>;
+            rr:joinCondition [
+                rr:child "track_id";
+                rr:parent "id";
+            ];
+        ];
+    ];
 .
 
 
