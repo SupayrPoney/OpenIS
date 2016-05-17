@@ -99,7 +99,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ex:OwnedByPerson
+        rr:predicate ex:OwnedByPerson;
         rr:objectMap [
             rr:parentTriplesMap <#PersonTripleMap>;
             rr:joinCondition [
