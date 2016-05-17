@@ -174,4 +174,24 @@
     ];
 .
 
+<#WorkoutTripleMap>
+    rdf:type rr:TriplesMap;
+    rr:logicalTable [rr:sqlQuery """
+    SELECT id FROM record
+    """];
 
+    rr:subjectMap [
+        rr:template "http://localhost/workout/{id}";
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:hasExercise;
+        rr:objectMap [
+            rr:parentTriplesMap <#ExerciseTripleMap>;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "ID";
+            ];
+        ];
+    ];
+.
