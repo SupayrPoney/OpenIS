@@ -98,7 +98,7 @@
         rr:class ex:UserAccount;
     ];
 
-    rr::predicateObjectMap [
+    rr:predicateObjectMap [
         rr:predicate ex:OwnedByPerson
         rr:objectMap [
             rr:parentTriplesMap <#PersonTripleMap>;
