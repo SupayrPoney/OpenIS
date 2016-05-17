@@ -50,13 +50,31 @@
                             }
                         });
         }
+
+        function deleteTracks(){
+
+        }
+
         L.easyButton({
           states:[
           {
+                stateName: 'addTracks',
                 icon: '<span class="star">&starf;</span>',
-                onClick: function(){ showTracks(SPARQL.allTracks()); },
+                onClick: function(control){ showTracks(SPARQL.allTracks()); 
+                                            control.state('removeTracks');
+                                        },
+                title: 'Display all tracks'
+          },
+          {
+                stateName: 'removeTracks',
+                icon: '<span class="cross">&cross;</span>',
+                onClick: function(control){ deleteTracks();
+                                            control.state('addTracks');
+
+                    },
                 title: 'remove markers'
           }
+
           ]
         }).addTo(map);
 
