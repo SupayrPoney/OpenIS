@@ -1,7 +1,7 @@
 all: triples.ttl
 
-database.ok:
-	./createdb.sh
+database.ok: createdb.sh populate.sql
+	./$<
 	touch $@
 
 triples.ttl: r2rml.ttl database.ok
