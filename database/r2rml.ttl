@@ -163,7 +163,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate tr:hasTrack;
+        rr:predicate tr:isAlongTrack;
         rr:objectMap [
             rr:parentTriplesMap <#TrackTripleMap>;
             rr:joinCondition [
