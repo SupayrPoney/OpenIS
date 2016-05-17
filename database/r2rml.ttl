@@ -92,7 +92,9 @@
 <#TrackTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
-    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry FROM track;
+    SELECT id,
+           ST_AsText(ST_Force2D(geometry::geometry)) AS geometry,
+           ST_Length(geometry)::int as length FROM track;
     """];
 
     rr:subjectMap [
@@ -103,6 +105,11 @@
     rr:predicateObjectMap [
         rr:predicate geo:hasGeometry;
         rr:objectMap [rr:column "geometry"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate tr:hasLength;
+        rr:objectMap [rr:column "length"];
     ];
 .
 
