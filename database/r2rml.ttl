@@ -21,7 +21,7 @@
            track_id,
            name AS has_type
     FROM record
-    LEFT JOIN activity_type ON activity_type_id = activity_type.id;
+    LEFT JOIN activity_type ON activity_type_id = activity_type.id
     """];
 
     # Could also put Exercise-track and Exercise-spot endpoints
@@ -57,7 +57,7 @@
     rdf:type rr:TriplesMap;
 
     rr:logicalTable [rr:sqlQuery """
-    SELECT id AS ID, weight, height, CASE WHEN male then 'male' ELSE 'female' END AS sex FROM public.user;
+    SELECT id AS ID, weight, height, CASE WHEN male then 'male' ELSE 'female' END AS sex FROM public.user
     """];
 
     rr:subjectMap [
@@ -100,7 +100,7 @@
     rr:logicalTable [rr:sqlQuery """
     SELECT id,
            ST_AsText(ST_Force2D(geometry::geometry)) AS geometry,
-           ST_Length(geometry)::int as length FROM track;
+           ST_Length(geometry)::int as length FROM track
     """];
 
     rr:subjectMap [
@@ -122,7 +122,7 @@
 <#ExerciseSpotTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
-    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, track_id FROM exercise_spot;
+    SELECT id, ST_AsText(ST_Force2D(geometry::geometry)) AS geometry, track_id FROM exercise_spot
     """];
 
     rr:subjectMap [
