@@ -52,6 +52,17 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate tr:ExerciseIn;
+        rr:objectMap [
+            rr:parentTriplesMap <#WorkoutTripleMap>;
+            rr:joinCondition [
+                rr:child "ID";
+                rr:parent "id";
+            ];
+        ];
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate ex:HasType;
         rr:objectMap [rr:column "has_type"];
     ];
@@ -185,7 +196,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ex:hasExercise;
+        rr:predicate ex:HasExercise;
         rr:objectMap [
             rr:parentTriplesMap <#ExerciseTripleMap>;
             rr:joinCondition [
