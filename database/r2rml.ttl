@@ -38,7 +38,6 @@
     rr:predicateObjectMap [
         rr:predicate ex:Equipment;
         rr:objectMap [rr:column "track_id"];
-        ];
     ];
 
     rr:predicateObjectMap [
