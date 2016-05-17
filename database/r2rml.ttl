@@ -92,6 +92,16 @@
         rr:template "http://localhost/user/{ID}";
         rr:class ex:UserAccount;
     ];
+
+    rr::predicateObjectMap [
+        rr:predicate UserAccount:OwnedByPerson
+        rr:objectMap [
+            rr:parentTriplesMap <#PersonTripleMap>;
+            rr:joinCondition [
+                rr:child "ID";
+                rr:parent "ID";
+        ];
+    ];
 .
 
 
