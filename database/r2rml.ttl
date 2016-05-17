@@ -8,6 +8,8 @@
 
 # Group aggreed definitions (Still need to put the webprotoge URL...)
 @prefix ex: <http://exercice.ontology#>.
+
+# Our custom definition, available on the internet
 @prefix tr: <http://openis.ititou.be/ont#>.
 
 <#ExerciseTripleMap>

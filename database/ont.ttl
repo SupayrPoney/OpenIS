@@ -3,7 +3,7 @@
 @prefix geo: <http://www.opengis.net/ont/geosparql#>.
 
 # Our application specific namespace
-@prefix ex:<http://openis.ititou.be/ont#>.
+@prefix ex: <http://openis.ititou.be/ont#>.
 
 ex:Track a owl:Class;
     rdfs:subclassOf geo:Feature.
