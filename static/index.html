@@ -37,51 +37,45 @@
         tracks = new L.FeatureGroup();
         map.addLayer(tracks);
 
-        function showTracks(sparql_query){
-            sparql_query.fail(function(){alert("Failed");})
-                        .done(function(data){
-                            var res = data.results.bindings
-                            tracks = new L.FeatureGroup();
-                            map.addLayer(tracks);
-                            for (var i=0; i<res.length; i++){
-                                console.log(res[i]);
-                                var col = '#' + (function co(lor){   return (lor +=
-                                  [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
-                                  && (lor.length == 6) ?  lor : co(lor); })(''); 
-                                var track = L.geoJson(parse(res[i].geom.value),{color: col});
-                                track.bindPopup("<b>Hello world!</b><br>I am a popup.");
-                                track.addTo(tracks);
-                            }
-                        });
+        function showTracks(data){
+            var res = data.results.bindings
+            tracks = new L.FeatureGroup();
+            map.addLayer(tracks);
+            for (var i=0; i<res.length; i++){
+                var col = '#' + (function co(lor){   return (lor +=
+                  [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
+                  && (lor.length == 6) ?  lor : co(lor); })(''); 
+                var track = L.geoJson(parse(res[i].geom.value),{color: col});
+                track.bindPopup("<pre>" + res[i].track.value + "</pre>");
+                track.addTo(tracks);
+            }
         }
 
         function deleteTracks(){
 
         }
 
-        L.easyButton({
-          states:[
-          {
+        L.easyButton({states:[
+            {
                 stateName: 'addTracks',
                 icon: '<span class="star">&starf;</span>',
-                onClick: function(control){ showTracks(SPARQL.allTracks()); 
-                                            control.state('removeTracks');
-                                        },
+                onClick: function(control){
+                    SPARQL.allTracks().done(showTracks); 
+                    control.state('removeTracks');
+                },
                 title: 'Display all tracks'
-          },
-          {
+            },
+            {
                 stateName: 'removeTracks',
                 icon: '<span class="cross">&cross;</span>',
-                onClick: function(control){ deleteTracks();
-                                            map.removeLayer(tracks);
-                                            control.state('addTracks');
-
-                    },
+                onClick: function(control){
+                    deleteTracks();
+                    map.removeLayer(tracks);
+                    control.state('addTracks');
+                },
                 title: 'Hide all tracks'
-          }
-
-          ]
-        }).addTo(map);
+            }
+        ]}).addTo(map);
 
         
               

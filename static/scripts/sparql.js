@@ -23,7 +23,7 @@ const SPARQL = {
         // Then format to WKT
         var pointStr = points.map(function(ll){return ll.join(' ')}).join(',');
         return this.sparql(
-            " SELECT DISTINCT ?geom" +
+            " SELECT DISTINCT ?track ?geom" +
             " WHERE {" +
             "   ?track rdf:type ont:Track." +
             "   ?track geo:hasGeometry ?geom." +
@@ -35,6 +35,6 @@ const SPARQL = {
     },
 
     allTracks: function(){
-        return this.sparql("SELECT DISTINCT ?geom WHERE {?t rdf:type ont:Track. ?t geo:hasGeometry ?geom.}");
+        return this.sparql("SELECT DISTINCT ?track ?geom WHERE {?track rdf:type ont:Track. ?track geo:hasGeometry ?geom.}");
     }
 };
