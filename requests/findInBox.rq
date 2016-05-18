@@ -6,11 +6,11 @@ PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
 PREFIX sf: <http://www.opengis.net/ont/sf#>
 
-PREFIX ont: <http://openis.ititou.be/ont#>
+PREFIX tr: <http://openis.ititou.be/ont#>
 
 SELECT DISTINCT ?track ?geom
 WHERE {
-    ?track rdf:type ont:Track.
+    ?track rdf:type tr:Track.
     ?track geo:hasGeometry ?geom.
 
     FILTER (

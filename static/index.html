@@ -16,17 +16,14 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:fixed; top:0%; bottom:0; width:100%;}
-
+        .sparql-template {display: none;}
   </style>
 </head>
 <body>
     <div id='map'></div>
 
     <script type="text/javascript">
-        $("#caca").click(function() {
-            alert( "Handler for .click() called." );
-        });
-// Replace 'mapbox.streets' with your map id.
+    $(document).ready(function(){
         var mapboxTiles = L.tileLayer('https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw' , {
             attribution: '© <a href="https://www.mapbox.com/map-feedback/">Mapbox</a> © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         });
@@ -37,54 +34,91 @@
         tracks = new L.FeatureGroup();
         map.addLayer(tracks);
 
-        function showTracks(sparql_query){
-            sparql_query.fail(function(){alert("Failed");})
-                        .done(function(data){
-                            var res = data.results.bindings
-                            tracks = new L.FeatureGroup();
-                            map.addLayer(tracks);
-                            for (var i=0; i<res.length; i++){
-                                console.log(res[i]);
-                                var col = '#' + (function co(lor){   return (lor +=
-                                  [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
-                                  && (lor.length == 6) ?  lor : co(lor); })(''); 
-                                var track = L.geoJson(parse(res[i].geom.value),{color: col});
-                                track.bindPopup("<b>Hello world!</b><br>I am a popup.");
-                                track.addTo(tracks);
-                            }
-                        });
+        function showTracks(data){
+            var res = data.results.bindings
+            tracks = new L.FeatureGroup();
+            map.addLayer(tracks);
+            for (var i=0; i<res.length; i++){
+                var col = '#' + (function co(lor){   return (lor +=
+                  [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
+                  && (lor.length == 6) ?  lor : co(lor); })(''); 
+                var track = L.geoJson(parse(res[i].geom.value),{color: col});
+                track.bindPopup("<pre>" + res[i].track.value + "</pre>");
+                track.addTo(tracks);
+            }
         }
 
         function deleteTracks(){
-
+            map.removeLayer(tracks);
         }
 
-        L.easyButton({
-          states:[
-          {
+        L.easyButton({states:[
+            {
                 stateName: 'addTracks',
                 icon: '<span class="star">&starf;</span>',
-                onClick: function(control){ showTracks(SPARQL.allTracks()); 
-                                            control.state('removeTracks');
-                                        },
+                onClick: function(control){
+                    var box = map.getBounds();
+                    var template = SPARQL.loadTemplate('getTracksInBox');
+                    var args = {
+                        lon1: box._northEast.lng,
+                        lat1: box._northEast.lat,
+                        lon2: box._southWest.lng,
+                        lat2: box._southWest.lat
+                    };
+
+                    SPARQL.query(template(args))
+                          .done(showTracks)
+                          .fail(function(){alert("Error !");});
+                    control.state('removeTracks');
+                },
                 title: 'Display all tracks'
-          },
-          {
+            },
+            {
                 stateName: 'removeTracks',
                 icon: '<span class="cross">&cross;</span>',
-                onClick: function(control){ deleteTracks();
-                                            map.removeLayer(tracks);
-                                            control.state('addTracks');
-
-                    },
+                onClick: function(control){
+                    deleteTracks();
+                    control.state('addTracks');
+                },
                 title: 'Hide all tracks'
-          }
-
-          ]
-        }).addTo(map);
-
-        
-              
+            }
+        ]}).addTo(map);
+    });
     </script>
+
+    <div class="sparql-template" id="getAllTracks">
+        SELECT DISTINCT ?track ?geom
+        WHERE {
+            ?track rdf:type tr:Track.
+            ?track geo:hasGeometry ?geom.
+        }
+    </div>
+    <div class="sparql-template" id="getTracksInBox">
+        SELECT DISTINCT ?track ?geom
+        WHERE {
+          ?track rdf:type tr:Track.
+          ?track geo:hasGeometry ?geom.
+          FILTER (
+            geof:sfContains(
+              STRDT("POLYGON((${lon1} ${lat1}, ${lon1} ${lat2}, ${lon2} ${lat2}, ${lon2} ${lat1}, ${lon1} ${lat1}))", sf:wktLiteral),
+              STRDT(?geom, sf:wktLiteral)
+            )
+          ).
+        }
+    </div>
+    <div class="sparql-template" id="getTracksCrossing">
+        SELECT DISTINCT ?track ?geom
+        WHERE {
+          ?track rdf:type tr:Track.
+          ?track geo:hasGeometry ?geom.
+          ${track} geo:hasGeometry ?x.
+          FILTER (
+            geof:sfIntersects(
+              STRDT(?x, sf:wktLiteral),
+              STRDT(?geom, sf:wktLiteral)
+            )
+          ).
+        }
+    </div>
 </body>
 </html>
