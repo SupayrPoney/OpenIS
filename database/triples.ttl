@@ -1,68 +1,4 @@
 
-<http://localhost/exercise/1/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#Duration> "6.633E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#HasType> "Running" ;
-	<http://exercice.ontology#Equipment> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://localhost/exercise/2/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#Duration> "2.972E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#HasType> "Biking" ;
-	<http://exercice.ontology#Equipment> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://localhost/exercise/3/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#Duration> "2.9110000000000005E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#HasType> "Biking" ;
-	<http://openis.ititou.be/ont#hasReview> "Too long, I was rapidly tired" ;
-	<http://exercice.ontology#Rating> "2"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-	<http://exercice.ontology#Equipment> "7"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://localhost/exercise/4/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#Duration> "3.847E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#HasType> "Horse backriding" ;
-	<http://openis.ititou.be/ont#hasReview> "Yeah really good track, loved it" ;
-	<http://exercice.ontology#Rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-	<http://exercice.ontology#Equipment> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://localhost/exercise/1/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/1> .
-
-<http://localhost/exercise/2/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/2> .
-
-<http://localhost/exercise/3/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/3> .
-
-<http://localhost/exercise/4/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/4> .
-
-<http://localhost/exercise/1/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/10> .
-
-<http://localhost/exercise/2/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/3> .
-
-<http://localhost/exercise/3/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/7> .
-
-<http://localhost/exercise/4/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/4> .
-
-<http://localhost/user/1> a <http://exercice.ontology#UserAccount> .
-
-<http://localhost/user/2> a <http://exercice.ontology#UserAccount> .
-
-<http://localhost/user/3> a <http://exercice.ontology#UserAccount> .
-
-<http://localhost/user/4> a <http://exercice.ontology#UserAccount> .
-
-<http://localhost/user/1> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/1> .
-
-<http://localhost/user/2> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/2> .
-
-<http://localhost/user/3> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/3> .
-
-<http://localhost/user/4> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/4> .
-
-<http://localhost/user/1> <http://exercice.ontology#UserOf> <http://localhost/workout/1> .
-
-<http://localhost/user/2> <http://exercice.ontology#UserOf> <http://localhost/workout/2> .
-
-<http://localhost/user/3> <http://exercice.ontology#UserOf> <http://localhost/workout/3> .
-
-<http://localhost/user/4> <http://exercice.ontology#UserOf> <http://localhost/workout/4> .
-
 <http://localhost/track/1> a <http://openis.ititou.be/ont#Track> ;
 	<http://www.opengis.net/ont/geosparql#hasGeometry> "LINESTRING(4.34505 50.8138,4.34775 50.81388,4.34831 50.81337,4.35346 50.81187,4.3575 50.81144,4.36822 50.81212,4.36981 50.81166,4.37573 50.81326,4.37509 50.81431,4.37681 50.81518,4.37767 50.81651,4.37925 50.81825,4.38393 50.82031,4.38711 50.82144,4.38985 50.82269,4.39578 50.82584,4.39968 50.82735,4.4047 50.83185,4.40599 50.83432,4.40784 50.83771,4.40625 50.84202,4.40329 50.84706,4.40084 50.85166,4.39573 50.85898,4.39153 50.86131,4.38771 50.86204,4.38569 50.86415,4.38539 50.86581,4.38578 50.86789,4.38406 50.86957,4.38007 50.87217)" ;
 	<http://openis.ititou.be/ont#hasLength> "10529"^^<http://www.w3.org/2001/XMLSchema#integer> .
@@ -111,50 +47,6 @@
 
 <http://localhost/track/4> <http://exercice.ontology#performed> <http://localhost/exercise/4/> .
 
-<http://localhost/person/1> a <http://exercice.ontology#Person> ;
-	<http://dbpedia.org/ontology/Person#weight> "8.0E1"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "male" ;
-	<http://dbpedia.org/ontology/Person#height> "1.8E2"^^<http://www.w3.org/2001/XMLSchema#double> .
-
-<http://localhost/person/2> a <http://exercice.ontology#Person> ;
-	<http://dbpedia.org/ontology/Person#weight> "6.5E1"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "female" ;
-	<http://dbpedia.org/ontology/Person#height> "1.6199999999999999E2"^^<http://www.w3.org/2001/XMLSchema#double> .
-
-<http://localhost/person/3> a <http://exercice.ontology#Person> ;
-	<http://dbpedia.org/ontology/Person#weight> "1.08E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "male" ;
-	<http://dbpedia.org/ontology/Person#height> "2.07E2"^^<http://www.w3.org/2001/XMLSchema#double> .
-
-<http://localhost/person/4> a <http://exercice.ontology#Person> ;
-	<http://dbpedia.org/ontology/Person#weight> "5.7E1"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "female" ;
-	<http://dbpedia.org/ontology/Person#height> "1.52E2"^^<http://www.w3.org/2001/XMLSchema#double> .
-
-<http://localhost/person/1> <http://exercice.ontology#PersonOf> <http://localhost/user/1> .
-
-<http://localhost/person/2> <http://exercice.ontology#PersonOf> <http://localhost/user/2> .
-
-<http://localhost/person/3> <http://exercice.ontology#PersonOf> <http://localhost/user/3> .
-
-<http://localhost/person/4> <http://exercice.ontology#PersonOf> <http://localhost/user/4> .
-
-<http://localhost/track/2> <http://openis.ititou.be/ont#hasTags> "Nature" , "Pic Nic" .
-
-<http://localhost/track/3> <http://openis.ititou.be/ont#hasTags> "Nature" .
-
-<http://localhost/track/4> <http://openis.ititou.be/ont#hasTags> "Nature" .
-
-<http://localhost/track/5> <http://openis.ititou.be/ont#hasTags> "Urban" .
-
-<http://localhost/track/6> <http://openis.ititou.be/ont#hasTags> "Scenery" .
-
-<http://localhost/track/7> <http://openis.ititou.be/ont#hasTags> "Fountain" .
-
-<http://localhost/exercise_spot/1> a <http://openis.ititou.be/ont#ExerciseSpot> ;
-	<http://www.opengis.net/ont/geosparql#hasGeometry> "GEOMETRYCOLLECTION(POINT(50.812064 4.372454))" ;
-	<http://openis.ititou.be/ont#isAlongTrack> <http://localhost/track/1> .
-
 <http://localhost/workout/1> <http://exercice.ontology#HasExercise> <http://localhost/exercise/1/> .
 
 <http://localhost/workout/2> <http://exercice.ontology#HasExercise> <http://localhost/exercise/2/> .
@@ -170,3 +62,111 @@
 <http://localhost/workout/3> <http://exercice.ontology#HasUser> <http://localhost/user/3> .
 
 <http://localhost/workout/4> <http://exercice.ontology#HasUser> <http://localhost/user/4> .
+
+<http://localhost/exercise/1/> a <http://exercice.ontology#Exercise> ;
+	<http://exercice.ontology#HasType> "Running" ;
+	<http://exercice.ontology#Duration> "6.633E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://exercice.ontology#Equipment> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
+
+<http://localhost/exercise/2/> a <http://exercice.ontology#Exercise> ;
+	<http://exercice.ontology#HasType> "Biking" ;
+	<http://exercice.ontology#Duration> "2.972E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://exercice.ontology#Equipment> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+
+<http://localhost/exercise/3/> a <http://exercice.ontology#Exercise> ;
+	<http://exercice.ontology#HasType> "Biking" ;
+	<http://exercice.ontology#Duration> "2.9110000000000005E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://exercice.ontology#Equipment> "7"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://openis.ititou.be/ont#hasReview> "Too long, I was rapidly tired" ;
+	<http://exercice.ontology#Rating> "2"^^<http://www.w3.org/2001/XMLSchema#integer> .
+
+<http://localhost/exercise/4/> a <http://exercice.ontology#Exercise> ;
+	<http://exercice.ontology#HasType> "Horse backriding" ;
+	<http://exercice.ontology#Duration> "3.847E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://exercice.ontology#Equipment> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://openis.ititou.be/ont#hasReview> "Yeah really good track, loved it" ;
+	<http://exercice.ontology#Rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
+
+<http://localhost/exercise/1/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/10> .
+
+<http://localhost/exercise/2/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/3> .
+
+<http://localhost/exercise/3/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/7> .
+
+<http://localhost/exercise/4/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/4> .
+
+<http://localhost/exercise/1/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/1> .
+
+<http://localhost/exercise/2/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/2> .
+
+<http://localhost/exercise/3/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/3> .
+
+<http://localhost/exercise/4/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/4> .
+
+<http://localhost/exercise_spot/1> a <http://openis.ititou.be/ont#ExerciseSpot> ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> "GEOMETRYCOLLECTION(POINT(50.812064 4.372454))" ;
+	<http://openis.ititou.be/ont#isAlongTrack> <http://localhost/track/1> .
+
+<http://localhost/track/2> <http://openis.ititou.be/ont#hasTags> "Nature" , "Pic Nic" .
+
+<http://localhost/track/3> <http://openis.ititou.be/ont#hasTags> "Nature" .
+
+<http://localhost/track/4> <http://openis.ititou.be/ont#hasTags> "Nature" .
+
+<http://localhost/track/5> <http://openis.ititou.be/ont#hasTags> "Urban" .
+
+<http://localhost/track/6> <http://openis.ititou.be/ont#hasTags> "Scenery" .
+
+<http://localhost/track/7> <http://openis.ititou.be/ont#hasTags> "Fountain" .
+
+<http://localhost/user/1> a <http://exercice.ontology#UserAccount> .
+
+<http://localhost/user/2> a <http://exercice.ontology#UserAccount> .
+
+<http://localhost/user/3> a <http://exercice.ontology#UserAccount> .
+
+<http://localhost/user/4> a <http://exercice.ontology#UserAccount> .
+
+<http://localhost/user/1> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/1> .
+
+<http://localhost/user/2> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/2> .
+
+<http://localhost/user/3> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/3> .
+
+<http://localhost/user/4> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/4> .
+
+<http://localhost/user/1> <http://exercice.ontology#UserOf> <http://localhost/workout/1> .
+
+<http://localhost/user/2> <http://exercice.ontology#UserOf> <http://localhost/workout/2> .
+
+<http://localhost/user/3> <http://exercice.ontology#UserOf> <http://localhost/workout/3> .
+
+<http://localhost/user/4> <http://exercice.ontology#UserOf> <http://localhost/workout/4> .
+
+<http://localhost/person/1> a <http://exercice.ontology#Person> ;
+	<http://dbpedia.org/ontology/Person#height> "1.8E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://dbpedia.org/ontology/Person#sex> "male" ;
+	<http://dbpedia.org/ontology/Person#weight> "8.0E1"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://localhost/person/2> a <http://exercice.ontology#Person> ;
+	<http://dbpedia.org/ontology/Person#height> "1.6199999999999999E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://dbpedia.org/ontology/Person#sex> "female" ;
+	<http://dbpedia.org/ontology/Person#weight> "6.5E1"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://localhost/person/3> a <http://exercice.ontology#Person> ;
+	<http://dbpedia.org/ontology/Person#height> "2.07E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://dbpedia.org/ontology/Person#sex> "male" ;
+	<http://dbpedia.org/ontology/Person#weight> "1.08E2"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://localhost/person/4> a <http://exercice.ontology#Person> ;
+	<http://dbpedia.org/ontology/Person#height> "1.52E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://dbpedia.org/ontology/Person#sex> "female" ;
+	<http://dbpedia.org/ontology/Person#weight> "5.7E1"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://localhost/person/1> <http://exercice.ontology#PersonOf> <http://localhost/user/1> .
+
+<http://localhost/person/2> <http://exercice.ontology#PersonOf> <http://localhost/user/2> .
+
+<http://localhost/person/3> <http://exercice.ontology#PersonOf> <http://localhost/user/3> .
+
+<http://localhost/person/4> <http://exercice.ontology#PersonOf> <http://localhost/user/4> .
