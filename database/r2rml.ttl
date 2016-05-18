@@ -228,3 +228,13 @@
         ];
     ];
 .
+
+<#TagTripleMap>
+    rr:logicalTable [rr:tableName "tagged"];
+    rr:subjectMap [
+        rr:template "http://localhost/track/{track_id}";
+    ];
+    rr:predicateObjectMap [
+      rr:predicate tr:hasTags;
+      rr:objectMap [ rr:column "tag" ];
+    ].
