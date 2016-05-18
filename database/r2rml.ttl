@@ -19,9 +19,11 @@
     SELECT record.id AS ID,
            extract('epoch' FROM (end_time - start_time)) AS duration,
            track_id,
-           name AS has_type
+           name AS has_type,
+           grade
     FROM record
     LEFT JOIN activity_type ON activity_type_id = activity_type.id
+    LEFT JOIN rating ON rating.record_id = record.id
     """];
 
     # Could also put Exercise-track and Exercise-spot endpoints
@@ -38,6 +40,16 @@
     rr:predicateObjectMap [
         rr:predicate ex:Equipment;
         rr:objectMap [rr:column "track_id"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:HasType;
+        rr:objectMap [rr:column "has_type"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:Rating;
+        rr:objectMap [rr:column "grade"];
     ];
 
     rr:predicateObjectMap [
@@ -60,11 +72,6 @@
                 rr:parent "id";
             ];
         ];
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ex:HasType;
-        rr:objectMap [rr:column "has_type"];
     ];
 .
 
