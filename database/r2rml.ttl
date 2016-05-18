@@ -20,7 +20,8 @@
            extract('epoch' FROM (end_time - start_time)) AS duration,
            track_id,
            name AS has_type,
-           grade
+           grade,
+           review
     FROM record
     LEFT JOIN activity_type ON activity_type_id = activity_type.id
     LEFT JOIN rating ON rating.record_id = record.id
@@ -50,6 +51,11 @@
     rr:predicateObjectMap [
         rr:predicate ex:Rating;
         rr:objectMap [rr:column "grade"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate tr:hasReview;
+        rr:objectMap [rr:column "review"];
     ];
 
     rr:predicateObjectMap [

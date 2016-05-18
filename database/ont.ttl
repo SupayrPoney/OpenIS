@@ -38,3 +38,9 @@ tr:hasTags a owl:ObjectProperty ;
     rdfs:comment "The tags of a track" ;
     rdfs:range xs:string ;
     rdfs:domain tr:Track.
+
+tr:hasReview a owl:ObjectProperty ;
+    rdfs:label "hasReview" ;
+    rdfs:comment "The review of an exercise by a user" ;
+    rdfs:range xs:string ;
+    rdfs:domain ex:Exercise .
