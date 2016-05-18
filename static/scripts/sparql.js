@@ -1,4 +1,5 @@
 const SPARQL = {
+    ENDPOINT: "http://openis.ititou.be:8080/parliament/sparql",
     PREFIXES: 'PREFIX geo: <http://www.opengis.net/ont/geosparql#>\n'+
               'PREFIX geof: <http://www.opengis.net/def/function/geosparql/>\n' +
               'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n' +
@@ -17,7 +18,7 @@ const SPARQL = {
             output: "json"
         };
 
-        return $.post("http://openis.ititou.be:8080/parliament/sparql", payload);
+        return $.post(this.ENDPOINT, payload);
     },
 
     /* Load a template query. Return a function, which can be called
