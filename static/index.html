@@ -49,7 +49,7 @@
         }
 
         function deleteTracks(){
-
+            map.removeLayer(tracks);
         }
 
         L.easyButton({states:[
@@ -78,7 +78,6 @@
                 icon: '<span class="cross">&cross;</span>',
                 onClick: function(control){
                     deleteTracks();
-                    map.removeLayer(tracks);
                     control.state('addTracks');
                 },
                 title: 'Hide all tracks'
@@ -99,9 +98,11 @@
         WHERE {
           ?track rdf:type tr:Track.
           ?track geo:hasGeometry ?geom.
-          FILTER (geof:sfContains(
-            STRDT("POLYGON((${lon1} ${lat1}, ${lon1} ${lat2}, ${lon2} ${lat2}, ${lon2} ${lat1}, ${lon1} ${lat1}))", sf:wktLiteral),
-            STRDT(?geom, sf:wktLiteral))
+          FILTER (
+            geof:sfContains(
+              STRDT("POLYGON((${lon1} ${lat1}, ${lon1} ${lat2}, ${lon2} ${lat2}, ${lon2} ${lat1}, ${lon1} ${lat1}))", sf:wktLiteral),
+              STRDT(?geom, sf:wktLiteral)
+            )
           ).
         }
     </div>
