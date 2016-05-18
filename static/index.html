@@ -34,7 +34,20 @@
         tracks = new L.FeatureGroup();
         map.addLayer(tracks);
 
+        function showIntersectingTracks(track){
+            map.removeLayer(tracks);
+            tracks = new L.FeatureGroup();
+            map.addLayer(tracks);
+            var template = SPARQL.loadTemplate('getTracksCrossing');
+
+            SPARQL.query(template({track: track}))
+                  .done(showTracks)
+                  .fail(function(){alert("Error while querying!");});
+        }
+
         function showTracks(data){
+            console.log(data);
+
             var res = data.results.bindings
             tracks = new L.FeatureGroup();
             map.addLayer(tracks);
@@ -43,11 +56,16 @@
                   [0,1,2,3,4,5,6,7,8,9,'a','b','c','d','e','f'][Math.floor(Math.random()*16)])
                   && (lor.length == 6) ?  lor : co(lor); })(''); 
                 var track = L.geoJson(parse(res[i].geom.value),{color: col});
-                track.bindPopup("<pre>" + res[i].track.value + "</pre>");
+                var trackValue = res[i].track.value;
+                var newDom = $("<span> <pre>" + trackValue + "</pre></span>");
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show intersecting tracks</button>").click(function(){
+                    console.log(this);
+                    showIntersectingTracks($(this).attr('data-track'));
+                }))
+                track.bindPopup(newDom[0]);
                 track.addTo(tracks);
             }
         }
-
         function deleteTracks(){
             map.removeLayer(tracks);
         }
@@ -58,7 +76,7 @@
                 icon: '<span class="star">&starf;</span>',
                 onClick: function(control){
                     var box = map.getBounds();
-                    var template = SPARQL.loadTemplate('getTracksInBox');
+                    var template = SPARQL.loadTemplate('getAllTracks');
                     var args = {
                         lon1: box._northEast.lng,
                         lat1: box._northEast.lat,
@@ -68,7 +86,7 @@
 
                     SPARQL.query(template(args))
                           .done(showTracks)
-                          .fail(function(){alert("Error !");});
+                          .fail(function(){alert("Error while querying!");});
                     control.state('removeTracks');
                 },
                 title: 'Display all tracks'
@@ -83,6 +101,7 @@
                 title: 'Hide all tracks'
             }
         ]}).addTo(map);
+
     });
     </script>
 
@@ -111,7 +130,7 @@
         WHERE {
           ?track rdf:type tr:Track.
           ?track geo:hasGeometry ?geom.
-          ${track} geo:hasGeometry ?x.
+          <${track}> geo:hasGeometry ?x.
           FILTER (
             geof:sfIntersects(
               STRDT(?x, sf:wktLiteral),
