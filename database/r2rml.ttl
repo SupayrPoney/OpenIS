@@ -179,6 +179,17 @@
         rr:predicate tr:hasLength;
         rr:objectMap [rr:column "length"];
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:performed;
+        rr:objectMap [
+            rr:parentTriplesMap <#ExerciseTripleMap>;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "ID";
+            ];
+        ];
+    ];
 .
 
 <#ExerciseSpotTripleMap>

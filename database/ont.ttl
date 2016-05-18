@@ -29,9 +29,15 @@ tr:isAlongTrack a owl:ObjectProperty ;
 
 tr:hasTrack a owl:ObjectProperty ;
     rdfs:label "hasTrack" ;
-    rdfs:comment "The track on which an exercise was performed" ;
+    rdfs:comment "The track on which an exercise is performed" ;
     rdfs:range tr:Track ;
     rdfs:domain ex:Exercise.
+
+tr:performed a owl:ObjectProperty ;
+    rdfs:label "performed" ;
+    rdfs:comment "The exercise related to a track" ;
+    rdfs:range ex:Exercise ;
+    rdfs:domain tr:Track.
 
 tr:hasTags a owl:ObjectProperty ;
     rdfs:label "hasTags" ;
