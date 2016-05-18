@@ -18,6 +18,18 @@
         body { margin:0; padding:0; }
         #map { position:fixed; top:0%; bottom:0; width:100%;}
         .sparql-template {display: none;}
+        .my-custom-control {
+            padding:5px 10px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 11px;
+            line-height: 18px;
+            border-radius: 5px;
+        }
+
+        .my-custom-control:empty {
+            display: none;
+        }
   </style>
 </head>
 <body>
@@ -46,6 +58,24 @@
                   .fail(function(){alert("Error while querying!");});
         }
 
+        function showExercises(track) {
+            var template = SPARQL.loadTemplate('getExercises');
+
+            SPARQL.query(template({track: track}))
+                  .done(showData)
+                  .fail(function(){alert("Error while querying!");});
+        }
+
+        function showData(data) {
+            console.log(data);
+            var res = data.results.bindings;
+            var toShow = "";
+            for (var i=0; i < res.length; i++){
+                toShow += JSON.stringify(res[i], null, 4) + "\n";
+            }
+            alert(toShow);
+        }
+
         function showTracks(data){
             console.log(data);
 
@@ -62,6 +92,10 @@
                 newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show intersecting tracks</button>").click(function(){
                     console.log(this);
                     showIntersectingTracks($(this).attr('data-track'));
+                }))
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show user exercises</button>").click(function(){
+                    console.log(this);
+                    showExercises($(this).attr('data-track'));
                 }))
                 track.bindPopup(newDom[0]);
                 track.addTo(tracks);
@@ -167,6 +201,7 @@
         ]}).addTo(map);
 
     });
+
     </script>
 
     <div class="sparql-template" id="getAllTracks">
@@ -221,6 +256,18 @@
             ?ex exont:HasType "Biking".
             ?ex ont:hasTrack ?track.
             ?track geo:hasGeometry ?geom.
+        }
+    </div>
+
+    <div class="sparql-template" id="getExercises">
+        SELECT DISTINCT ?type ?duration ?rating ?review
+        WHERE {
+            ?exercise rdf:type exont:Exercise.
+            <${track}> ont:performed ?exercise.
+            ?exercise exont:HasType ?type.
+            ?exercise exont:Duration ?duration.
+            ?exercise exont:Rating ?rating.
+            ?exercise ont:hasReview ?review.
         }
     </div>
 </body>
