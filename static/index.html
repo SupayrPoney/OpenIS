@@ -102,6 +102,31 @@
             }
         ]}).addTo(map);
 
+        L.easyButton({states:[
+            {
+                stateName: 'addBikeTracks',
+                icon: '<span class="bike"> &otimes;</span>',
+                onClick: function(control){
+                    var template = SPARQL.loadTemplate('getBikingTracks');
+
+                    SPARQL.query(template())
+                          .done(showTracks)
+                          .fail(function(){alert("Error while querying!");});
+                    control.state('removeBikeTracks');
+                },
+                title: 'Display all bike tracks'
+            },
+            {
+                stateName: 'removeBikeTracks',
+                icon: '<span class="cross">&cross;</span>',
+                onClick: function(control){
+                    deleteTracks();
+                    control.state('addBikeTracks');
+                },
+                title: 'Hide all bike tracks'
+            }
+        ]}).addTo(map);
+
     });
     </script>
 
@@ -137,6 +162,16 @@
               STRDT(?geom, sf:wktLiteral)
             )
           ).
+        }
+    </div>
+
+    <div class="sparql-template" id="getBikingTracks">
+        SELECT DISTINCT ?track ?geom
+        WHERE {
+            ?ex rdf:type exont:Exercise.
+            ?ex exont:HasType "Biking".
+            ?ex ont:hasTrack ?track.
+            ?track geo:hasGeometry ?geom.
         }
     </div>
 </body>

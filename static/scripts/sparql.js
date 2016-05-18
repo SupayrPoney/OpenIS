@@ -4,6 +4,8 @@ const SPARQL = {
               'PREFIX geof: <http://www.opengis.net/def/function/geosparql/>\n' +
               'PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n' +
               'PREFIX sf: <http://www.opengis.net/ont/sf#>\n' +
+              'PREFIX exont: <http://webprotege.stanford.edu/ontologies/ExerciseOntology#>\n' +
+              'PREFIX ont: <http://openis.ititou.be/ont#>\n' +
               'PREFIX tr: <http://openis.ititou.be/ont#>\n',
 
     /* Perform a SPARQL query against our endpoint.
@@ -17,7 +19,7 @@ const SPARQL = {
             stylesheet: "",
             output: "json"
         };
-
+        console.log(payload.query);
         return $.post(this.ENDPOINT, payload);
     },
 
