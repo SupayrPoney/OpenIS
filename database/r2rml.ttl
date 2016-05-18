@@ -181,7 +181,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ex:performed;
+        rr:predicate tr:performed;
         rr:objectMap [
             rr:parentTriplesMap <#ExerciseTripleMap>;
             rr:joinCondition [
