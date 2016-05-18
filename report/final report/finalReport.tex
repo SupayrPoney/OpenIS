@@ -1,28 +1,30 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper]{scrreprt}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{titling}
 \usepackage{amssymb}
 \usepackage[colorinlistoftodos]{todonotes}
-\author{Group 10: \\ Matteo Marra, Antoine Carpentier, \\Titouan Christophe, Bruno Rocha Pereira}
-\title{Open Information Systems \\ Final Report}
+\title{\textbf{Open Information Systems\\Final Report}}
+\subtitle{2015-2016 Vrije Universiteit Brussel\\Responsible tutor : Christophe Debruyne - chrdebru@vub.ac.be}
+\author{\textbf{Trackerspace}\\Matteo Marra - mmarra@vub.ac.be - 0525999 - 1M Comp Sci Soft\\Antoine Carpentier - antcarpe@vub.ac.be - 0529527 - 1M Comp Sci AI\\Titouan Christophe - tichrist@vub.ac.be - 0529190 - 1M Comp Sci Soft\\Bruno Rocha Pereira - brochape@vub.ac.be - 0529512 - 1M Comp Sci Soft}
 \date{Exam Session: June 2016}
 \begin{document}
 \maketitle
-\section{Introduction}
+\chapter{Introduction}
 In this final report we will present our non-trivial demonstrator, \textit{Trackerspace} a web application that allows to navigate through running/biking tracks and exercise spots, that a user might use to record his workouts and look for a place where to do sport.
 Our server provides a \textit{SPARQL} endpoint that can be used to query the data in our database and retrieve information according to four different ontologies, carefully linked between each other to provide a complete open information system.
 
 We will begin describing the different ontologies we used and how we mapped to them, followed by the tools we used to develop and run our non-trivial demonstrator to finish with a description on what we achieved with our application.
-\section{Ontologies}
-\subsection{Overall ontology}
+\chapter{Ontologies}
+\section{Overall ontology}
 %blablabla on the ontology
 The non-trivial demonstrator embraces the concepts of the class ontology, called \textit{overall ontology} in this document.
 This ontology defines the concept of \texttt{Calorie}, defined as follows: ``A calorie is a unit of energy, it is gained by eating and lost during physical activity. A calorie equals 4.184 Joules".
 \todo{insert how we mapped to it }
 
-\subsection{Exercise ontology}
+\section{Exercise ontology}
 %blablabla on the ontology and how we mapped it
 As for the overall ontology, the application follows the concepts defined in the \textit{exercise ontology} \todo{maybe add a link to the ontology?}, such as \texttt{Workout}, \texttt{Exercise}, \texttt{UserAccount} and \texttt{Person}. 
 We encountered some differences between our application and how the ontology was defined, mainly because our application is totally different from the other applications following the same ontology. The main problem for us was that there is no concept like geographic position in the ontology, and our application is mostly based on that, since we model tracks. 
@@ -31,7 +33,7 @@ To map to the concept of \texttt{Equipment}, that is a property of an \texttt{Ex
 This showed us the need to create an ontology particular to our application that could map those concepts that were missing in the \textit{exercise ontology}, allowing us to relate also to the \textit{geosparql ontology} and create an end-point complete, that covers every functionality of our application.
 
 We did not map to some concepts that, also together with the other groups in the developing process of the ontology, we reputed not necessary, such as \texttt{HearthRate} and \texttt{Repeats}.
-\subsection{Geosparql ontology}
+\section{Geosparql ontology}
 %blablabla on geosparql and how we mapped to it [problems we had go here?]
 The OGC GeoSPARQL standard \footnote{http://www.opengeospatial.org/standards/geosparql} is a standard for representation and querying of geospatial data for the Semantic Web. It defines an ontology in \texttt{RDFS/OWL} and a \texttt{SPARQL} query interface.
 
@@ -39,24 +41,24 @@ It defines a class \texttt{geo:SpatialObject} and subclasses \texttt{geo:Feature
 Different types of geometries can be described, such as \texttt{Point}, \texttt{Polygon}, \texttt{Linestring} and many other.
 It uses the \textit{Well Known Text (WKT)} format to serialize the different geometries.
 
-\subsection{Our ontology}
+\section{Our ontology}
 %why we developed a new ontology
 %the exercise ontology doesn't have any notation of position, we needed to create a new one to extend geosparql
-As described in the previous sections, our ontology covers the classes and concepts that were not described in the \textit{exercise ontology}, and allow us to link our geospatial data to the \textit{GeoSPARQL ontology}, in order to increase the potential of our non-trivial demonstrator and allow to do geospatial queries on our tracks from the \texttt{SPARQL} endpoint.
+As described in the previous chapters, our ontology covers the classes and concepts that were not described in the \textit{exercise ontology}, and allow us to link our geospatial data to the \textit{GeoSPARQL ontology}, in order to increase the potential of our non-trivial demonstrator and allow to do geospatial queries on our tracks from the \texttt{SPARQL} endpoint.
 
 In this ontology we define a \texttt{Track} and an \texttt{ExerciseSpot} that are both subclasses of \texttt{geo:Feature}. This allows to inherit the property \texttt{geo:hasGeometry}, that will be used in the mapping to the ontology to finally map the geometry of the tracks and exercise spots to the \textit{geoSPARQL ontology}.
 
 We also define many properties like \texttt{isAlongTrack}, \texttt{hasTrack}, \texttt{performed}, \texttt{hasTags} and \texttt{hasReview}, that complete the set of data we have stored in our application.
 
-\section{Tools}
-\subsection{Parliament}
+\chapter{Tools}
+\section{Parliament}
 %brief on what is parliament and describe how and why we used it
-\subsection{db2triples}
+\section{db2triples}
 %brief on db2triples, problems we had mapping to the geosparql
-\section{Non trivial demostrator}
-\subsection{The application}
-\subsection{Queries}
-%description on what we achived
-\section{Conclusions}
+\chapter{Non trivial demonstrator}
+\section{The application}
+\section{Queries}
+%description on what we achieved
+\chapter{Conclusions}
 
 \end{document}
