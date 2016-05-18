@@ -9,7 +9,7 @@ const SPARQL = {
     /* Perform a SPARQL query against our endpoint.
        Add common prefixes before running the query.
        Return a jQuery AJAX future (use fut.done()/.fail()) */
-    query: function (Q, cont) {
+    query: function (Q) {
         var payload = {
             query: this.PREFIXES + Q,
             display: "json",
