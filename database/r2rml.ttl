@@ -7,7 +7,7 @@
 @prefix geo: <http://www.opengis.net/ont/geosparql#>.
 
 # Group aggreed definitions (Still need to put the webprotoge URL...)
-@prefix ex: <http://exercice.ontology#>.
+@prefix ex: <http://webprotege.stanford.edu/ontologies/ExerciseOntology#>.
 
 # Our custom definition, available on the internet
 @prefix tr: <http://openis.ititou.be/ont#>.

@@ -47,45 +47,45 @@
 
 <http://localhost/track/4> <http://openis.ititou.be/ont#performed> <http://localhost/exercise/4/> .
 
-<http://localhost/workout/1> <http://exercice.ontology#HasExercise> <http://localhost/exercise/1/> .
+<http://localhost/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://localhost/exercise/1/> .
 
-<http://localhost/workout/2> <http://exercice.ontology#HasExercise> <http://localhost/exercise/2/> .
+<http://localhost/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://localhost/exercise/2/> .
 
-<http://localhost/workout/3> <http://exercice.ontology#HasExercise> <http://localhost/exercise/3/> .
+<http://localhost/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://localhost/exercise/3/> .
 
-<http://localhost/workout/4> <http://exercice.ontology#HasExercise> <http://localhost/exercise/4/> .
+<http://localhost/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://localhost/exercise/4/> .
 
-<http://localhost/workout/1> <http://exercice.ontology#HasUser> <http://localhost/user/1> .
+<http://localhost/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://localhost/user/1> .
 
-<http://localhost/workout/2> <http://exercice.ontology#HasUser> <http://localhost/user/2> .
+<http://localhost/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://localhost/user/2> .
 
-<http://localhost/workout/3> <http://exercice.ontology#HasUser> <http://localhost/user/3> .
+<http://localhost/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://localhost/user/3> .
 
-<http://localhost/workout/4> <http://exercice.ontology#HasUser> <http://localhost/user/4> .
+<http://localhost/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://localhost/user/4> .
 
-<http://localhost/exercise/1/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#HasType> "Running" ;
-	<http://exercice.ontology#Duration> "6.633E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#Equipment> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://localhost/exercise/1/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Running" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "6.633E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
 
-<http://localhost/exercise/2/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#HasType> "Biking" ;
-	<http://exercice.ontology#Duration> "2.972E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#Equipment> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<http://localhost/exercise/2/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Biking" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "2.972E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
 
-<http://localhost/exercise/3/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#HasType> "Biking" ;
-	<http://exercice.ontology#Duration> "2.9110000000000005E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#Equipment> "7"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+<http://localhost/exercise/3/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Biking" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "2.9110000000000005E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "7"^^<http://www.w3.org/2001/XMLSchema#integer> ;
 	<http://openis.ititou.be/ont#hasReview> "Too long, I was rapidly tired" ;
-	<http://exercice.ontology#Rating> "2"^^<http://www.w3.org/2001/XMLSchema#integer> .
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Rating> "2"^^<http://www.w3.org/2001/XMLSchema#integer> .
 
-<http://localhost/exercise/4/> a <http://exercice.ontology#Exercise> ;
-	<http://exercice.ontology#HasType> "Horse backriding" ;
-	<http://exercice.ontology#Duration> "3.847E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://exercice.ontology#Equipment> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+<http://localhost/exercise/4/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Horse backriding" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "3.847E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
 	<http://openis.ititou.be/ont#hasReview> "Yeah really good track, loved it" ;
-	<http://exercice.ontology#Rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
 
 <http://localhost/exercise/1/> <http://openis.ititou.be/ont#hasTrack> <http://localhost/track/10> .
 
@@ -119,54 +119,54 @@
 
 <http://localhost/track/7> <http://openis.ititou.be/ont#hasTags> "Fountain" .
 
-<http://localhost/user/1> a <http://exercice.ontology#UserAccount> .
+<http://localhost/user/1> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
 
-<http://localhost/user/2> a <http://exercice.ontology#UserAccount> .
+<http://localhost/user/2> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
 
-<http://localhost/user/3> a <http://exercice.ontology#UserAccount> .
+<http://localhost/user/3> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
 
-<http://localhost/user/4> a <http://exercice.ontology#UserAccount> .
+<http://localhost/user/4> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
 
-<http://localhost/user/1> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/1> .
+<http://localhost/user/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://localhost/person/1> .
 
-<http://localhost/user/2> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/2> .
+<http://localhost/user/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://localhost/person/2> .
 
-<http://localhost/user/3> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/3> .
+<http://localhost/user/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://localhost/person/3> .
 
-<http://localhost/user/4> <http://exercice.ontology#OwnedByPerson> <http://localhost/person/4> .
+<http://localhost/user/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://localhost/person/4> .
 
-<http://localhost/user/1> <http://exercice.ontology#UserOf> <http://localhost/workout/1> .
+<http://localhost/user/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://localhost/workout/1> .
 
-<http://localhost/user/2> <http://exercice.ontology#UserOf> <http://localhost/workout/2> .
+<http://localhost/user/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://localhost/workout/2> .
 
-<http://localhost/user/3> <http://exercice.ontology#UserOf> <http://localhost/workout/3> .
+<http://localhost/user/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://localhost/workout/3> .
 
-<http://localhost/user/4> <http://exercice.ontology#UserOf> <http://localhost/workout/4> .
+<http://localhost/user/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://localhost/workout/4> .
 
-<http://localhost/person/1> a <http://exercice.ontology#Person> ;
+<http://localhost/person/1> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
 	<http://dbpedia.org/ontology/Person#height> "1.8E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#sex> "male" ;
 	<http://dbpedia.org/ontology/Person#weight> "8.0E1"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://localhost/person/2> a <http://exercice.ontology#Person> ;
+<http://localhost/person/2> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
 	<http://dbpedia.org/ontology/Person#height> "1.6199999999999999E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#sex> "female" ;
 	<http://dbpedia.org/ontology/Person#weight> "6.5E1"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://localhost/person/3> a <http://exercice.ontology#Person> ;
+<http://localhost/person/3> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
 	<http://dbpedia.org/ontology/Person#height> "2.07E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#sex> "male" ;
 	<http://dbpedia.org/ontology/Person#weight> "1.08E2"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://localhost/person/4> a <http://exercice.ontology#Person> ;
+<http://localhost/person/4> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
 	<http://dbpedia.org/ontology/Person#height> "1.52E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#sex> "female" ;
 	<http://dbpedia.org/ontology/Person#weight> "5.7E1"^^<http://www.w3.org/2001/XMLSchema#double> .
 
-<http://localhost/person/1> <http://exercice.ontology#PersonOf> <http://localhost/user/1> .
+<http://localhost/person/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://localhost/user/1> .
 
-<http://localhost/person/2> <http://exercice.ontology#PersonOf> <http://localhost/user/2> .
+<http://localhost/person/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://localhost/user/2> .
 
-<http://localhost/person/3> <http://exercice.ontology#PersonOf> <http://localhost/user/3> .
+<http://localhost/person/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://localhost/user/3> .
 
-<http://localhost/person/4> <http://exercice.ontology#PersonOf> <http://localhost/user/4> .
+<http://localhost/person/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://localhost/user/4> .
