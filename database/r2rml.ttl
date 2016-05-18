@@ -205,4 +205,15 @@
             ];
         ];
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:HasUser;
+        rr:objectMap [
+            rr:parentTriplesMap <#UserTripleMap>;
+            rr:joinCondition [
+                rr:child "id";
+                rr:parent "ID";
+            ];
+        ];
+    ];
 .
