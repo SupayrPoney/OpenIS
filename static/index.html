@@ -8,6 +8,7 @@
     <script src="scripts/wellknown.js" type="text/javascript"></script> 
     <script type="text/javascript" src='scripts/easy-button.js'></script>
     <script type="text/stylesheet" src="css/easy-button.css"></script>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
     <script type="text/javascript" src="scripts/sparql.js"></script>
@@ -66,6 +67,19 @@
                 track.addTo(tracks);
             }
         }
+        function showSpots(data){
+            var res = data.results.bindings
+            tracks = new L.FeatureGroup();
+            map.addLayer(tracks);
+            for (var i=0; i<res.length; i++){
+                var spot = L.geoJson(parse(res[i].geom.value));
+                console.log(res[i]);
+                var trackValue = res[i].exercise_spot.value;
+                spot.bindPopup("<pre>" + trackValue + "</pre>");
+                spot.addTo(tracks);
+            }
+
+        }
         function deleteTracks(){
             map.removeLayer(tracks);
         }
@@ -105,7 +119,7 @@
         L.easyButton({states:[
             {
                 stateName: 'addBikeTracks',
-                icon: '<span class="bike"> &otimes;</span>',
+                icon: 'fa-bicycle',
                 onClick: function(control){
                     var template = SPARQL.loadTemplate('getBikingTracks');
 
@@ -124,6 +138,31 @@
                     control.state('addBikeTracks');
                 },
                 title: 'Hide all bike tracks'
+            }
+        ]}).addTo(map);
+
+        L.easyButton({states:[
+            {
+                stateName: 'addAllSpots',
+                icon: 'fa-map-marker',
+                onClick: function(control){
+                    var template = SPARQL.loadTemplate('getAllSpots');
+
+                    SPARQL.query(template())
+                          .done(showSpots)
+                          .fail(function(){alert("Error while querying!");});
+                    control.state('removeAllSpots');
+                },
+                title: 'Display all Exercise Spots'
+            },
+            {
+                stateName: 'removeAllSpots',
+                icon: '<span class="cross">&cross;</span>',
+                onClick: function(control){
+                    deleteTracks();
+                    control.state('addAllSpots');
+                },
+                title: 'Hide all Exercise Spots'
             }
         ]}).addTo(map);
 
@@ -162,6 +201,16 @@
               STRDT(?geom, sf:wktLiteral)
             )
           ).
+        }
+    </div>
+
+    <div class="sparql-template" id="getAllSpots">
+        SELECT DISTINCT ?exercise_spot ?geom
+        WHERE {
+            ?exercise_spot rdf:type ont:ExerciseSpot.
+            ?track rdf:type ont:Track.
+            ?exercise_spot ont:isAlongTrack ?track.
+            ?exercise_spot geo:hasGeometry ?geom.
         }
     </div>
 
