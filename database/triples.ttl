@@ -104,7 +104,7 @@
 <http://localhost/exercise/4/> <http://openis.ititou.be/ont#ExerciseIn> <http://localhost/workout/4> .
 
 <http://localhost/exercise_spot/1> a <http://openis.ititou.be/ont#ExerciseSpot> ;
-	<http://www.opengis.net/ont/geosparql#hasGeometry> "GEOMETRYCOLLECTION(POINT(50.812064 4.372454))" ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> "GEOMETRYCOLLECTION(POINT(4.372454 50.812064))" ;
 	<http://openis.ititou.be/ont#isAlongTrack> <http://localhost/track/1> .
 
 <http://localhost/track/2> <http://openis.ititou.be/ont#hasTags> "Nature" , "Pic Nic" .

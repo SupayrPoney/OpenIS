@@ -28,7 +28,7 @@ INSERT INTO tag ("tag") VALUES
 
 
 INSERT INTO exercise_spot ("id", "geometry", "track_id") VALUES
-    ('1', 'SRID=4326;GEOMETRYCOLLECTION(POINT(50.812064 4.372454))', '1');
+    ('1', 'SRID=4326;GEOMETRYCOLLECTION(POINT(4.372454 50.812064))', '1');
 
 
 INSERT INTO tagged ("track_id", "tag") VALUES
