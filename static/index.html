@@ -58,11 +58,18 @@
                   .fail(function(){alert("Error while querying!");});
         }
 
-        function showExercises(track) {
-            var template = SPARQL.loadTemplate('getExercises');
+        function showTrackExercises(track) {
+            var template = SPARQL.loadTemplate('getTrackExercises');
 
             SPARQL.query(template({track: track}))
                   .done(showData)
+                  .fail(function(){alert("Error while querying!");});
+        }
+
+        function showTrackSpots(track) {
+            var template = SPARQL.loadTemplate('getTrackSpots');
+            SPARQL.query(template({track: track}))
+                  .done(showSpots)
                   .fail(function(){alert("Error while querying!");});
         }
 
@@ -93,9 +100,13 @@
                     console.log(this);
                     showIntersectingTracks($(this).attr('data-track'));
                 }))
-                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show user exercises</button>").click(function(){
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show track exercises</button>").click(function(){
                     console.log(this);
-                    showExercises($(this).attr('data-track'));
+                    showTrackExercises($(this).attr('data-track'));
+                }))
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show exercises spot near this track</button>").click(function(){
+                    console.log(this);
+                    showTrackSpots($(this).attr('data-track'));
                 }))
                 track.bindPopup(newDom[0]);
                 track.addTo(tracks);
@@ -259,7 +270,7 @@
         }
     </div>
 
-    <div class="sparql-template" id="getExercises">
+    <div class="sparql-template" id="getTrackExercises">
         SELECT DISTINCT ?type ?duration ?rating ?review
         WHERE {
             ?exercise rdf:type exont:Exercise.
@@ -268,6 +279,16 @@
             ?exercise exont:Duration ?duration.
             ?exercise exont:Rating ?rating.
             ?exercise ont:hasReview ?review.
+        }
+    </div>
+
+    <div class="sparql-template" id="getTrackSpots">
+        SELECT DISTINCT ?exercise_spot ?geom
+        WHERE {
+            ?exercise_spot rdf:type ont:ExerciseSpot.
+            ?track rdf:type ont:Track.
+            ?exercise_spot ont:isAlongTrack <${track}>.
+            ?exercise_spot geo:hasGeometry ?geom.
         }
     </div>
 </body>
