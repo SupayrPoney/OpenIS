@@ -74,7 +74,7 @@ We also define many properties like \texttt{isAlongTrack}, \texttt{hasTrack}, \t
 
 \chapter{Tools}
 \section{PostgreSQL and db2triples}
-As we mentioned in earlier reports, we use PostgreSQL and PostGis to prepare our data in relational tables. We then use db2triples \footnote{\url{https://github.com/chrdebru/db2triples}} to map our entities to RDF triples. Our mapping is written in the r2rml language \footnote{\url{https://www.w3.org/TR/r2rml/}}, using the Turtle syntax. The mapping file is called \texttt{r2rml.ttl}.
+As we mentioned in earlier reports, we use PostgreSQL and PostGis to prepare our data in relational tables. The ER diagram can be found in the appendix\ref{db:er}.  We then use db2triples \footnote{\url{https://github.com/chrdebru/db2triples}} to map our entities to RDF triples. Our mapping is written in the r2rml language \footnote{\url{https://www.w3.org/TR/r2rml/}}, using the Turtle syntax. The mapping file is called \texttt{r2rml.ttl}.
 %brief on db2triples, problems we had mapping to the geosparql
 
 \section{Parliament}
@@ -117,7 +117,7 @@ The last type of query we used as an example allows us to get all the tracks tha
 
 %description on what we achieved
 \chapter{Conclusions}
-\chapter*{Appendixes}
+\chapter*{Appendix}
 \begin{lstlisting}[caption={Prefixes used in the hereinbelow queries},label=query:prefixes]
 PREFIX geo: <http://www.opengis.net/ont/geosparql#>
 PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
@@ -199,5 +199,11 @@ WHERE {
     <${track}> ont:hasTags ?tag.
     ?track ont:hasTags ?tag.
 \end{lstlisting}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{er-diagram.png}
+    \caption{Entity Relationship diagram}
+    \label{db:er}
+\end{figure}
 
 \end{document}
