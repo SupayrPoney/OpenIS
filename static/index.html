@@ -81,11 +81,12 @@
                   .fail(function(){alert("Error while querying!");});
         }
 
-        function addExercise(id, track, type, calories, duration, rating, review) {
+        function addExercise(track, type, calories, duration, rating, review) {
             var template = SPARQL.loadTemplate('addExercise');
-            SPARQL.query(template({id: id, track: track, type: type, calories: calories, duration: duration, rating: rating, review: review}))
-                  .done(function(){alert("Data inserted!");})
-                  .fail(function(){alert("Error while querying!");});
+            var payload = {id: new Date().getTime().toString(), track: track, type: type, calories: calories, duration: duration, rating: rating, review: review, date: new Date()};
+            SPARQL.update(template(payload))
+                  // .done(function(){alert("Data inserted!");})
+                  // .fail(function(){alert("Error while querying!");});
         }
 
         function showData(data) {
@@ -138,9 +139,7 @@
                     var rating = this.elements[3].value;
                     var review = this.elements[4].value;
                     var track = this.elements[6].value;
-                    alert(type);
-                    alert(track);
-                    addExercise(new Date().getTime(), track, type, duration, calories, rating, review);
+                    addExercise(track, type, duration, calories, rating, review);
                 });
                 newDom.append(addExerciseForm);
                 track.bindPopup(newDom[0]);
@@ -370,23 +369,24 @@
     <div class="sparql-template" id="addExercise">
         INSERT DATA
         {
-            <http://tracker.space/exercise/${id}/>
-                <exont:HasType> ${type}^^<xs:string> ;
-                <exont:NumberOfCalories> ${calories}^^<xs:double> ;
-                <exont:Equipment> ${track}^^<xs:integer> ;
-                <exont:Duration> ${duration}^^<xs:double> ;
-                <exont:Rating> ${rating}^^<xs:integer> ;
-                <ont:hasReview> ${review}^^<xs:string> ;
-                <ont:hasTrack> <http://tracker.space/track/${track}> ;
-                <ont:ExerciseIn> <http://tracker.space/workout/${id}> .
+            &lt;http://tracker.space/exercise/${id}/&gt;
+                rdf:type exont:Exercise ;
+                exont:HasType "${type}" ;
+                exont:NumberOfCalories "${calories}"^^xs:double ;
+                <!-- exont:Equipment "${track}"^^xs:integer ; -->
+                exont:Duration "${duration}"^^xs:double ;
+                exont:Rating "${rating}"^^xs:integer ;
+                ont:hasReview "${review}" ;
+                ont:hasTrack &lt;${track}&gt; ;
+                ont:ExerciseIn &lt;http://tracker.space/workout/${id}&gt; .
 
-            <http://tracker.space/track/${track}> <ont:performed> <http://tracker.space/exercise/${id}/> .
+            &lt;${track}&gt; ont:performed &lt;http://tracker.space/exercise/${id}/&gt; .
 
-            <http://tracker.space/user/1> <exont:UserOf> <http://tracker.space/workout/${id}> .
+            &lt;http://tracker.space/user/1&gt; exont:UserOf &lt;http://tracker.space/workout/${id}&gt; .
 
-            <http://tracker.space/workout/${id}> 
-                <exont:HasDate> ${date}^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
-                <exont:HasExercice> <http://track.space/exercise/${id}/>.
+            &lt;http://tracker.space/workout/${id}&gt; 
+                exont:HasDate "${date}"^^xs:dateTime ;
+                exont:HasExercice &lt;http://track.space/exercise/${id}/&gt;.
         }
     </div>
 </body>

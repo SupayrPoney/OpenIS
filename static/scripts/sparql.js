@@ -6,7 +6,8 @@ const SPARQL = {
               'PREFIX sf: <http://www.opengis.net/ont/sf#>\n' +
               'PREFIX exont: <http://webprotege.stanford.edu/ontologies/ExerciseOntology#>\n' +
               'PREFIX ont: <http://openis.ititou.be/ont#>\n' +
-              'PREFIX tr: <http://openis.ititou.be/ont#>\n',
+              'PREFIX tr: <http://openis.ititou.be/ont#>\n' +
+              'PREFIX xs: <http://www.w3.org/2001/XMLSchema#>\n',
 
     /* Perform a SPARQL query against our endpoint.
        Add common prefixes before running the query.
@@ -24,8 +25,8 @@ const SPARQL = {
     },
 
     update: function (Q) {
-        var payload = {update: this.PREFIX + Q};
-        console.log(payload.query);
+        var payload = {update: this.PREFIXES + Q};
+        console.log(payload.update);
         return $.post(this.ENDPOINT, payload);
     },
 
