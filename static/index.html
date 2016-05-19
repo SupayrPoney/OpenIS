@@ -94,7 +94,10 @@
             var res = data.results.bindings;
             var toShow = "";
             for (var i=0; i < res.length; i++){
-                toShow += JSON.stringify(res[i], null, 4) + "\n";
+                toShow += "****************************************\n";
+                Object.keys(res[i]).forEach(function(key,index) {
+                    toShow += key + ": " + res[i][key].value + "\n";
+                });
             }
             alert(toShow);
         }
