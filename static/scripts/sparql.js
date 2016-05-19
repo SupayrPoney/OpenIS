@@ -23,6 +23,12 @@ const SPARQL = {
         return $.post(this.ENDPOINT, payload);
     },
 
+    update: function (Q) {
+        var payload = {update: this.PREFIX + Q};
+        console.log(payload.query);
+        return $.post(this.ENDPOINT, payload);
+    },
+
     /* Load a template query. Return a function, which can be called
        with a context and return a query string */
     loadTemplate: function(name){
