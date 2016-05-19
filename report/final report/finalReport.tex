@@ -6,9 +6,28 @@
 \usepackage{titling}
 \usepackage{amssymb}
 \usepackage{hyperref}
-
-
+\usepackage{syntax}
+\usepackage{listings}
 \usepackage[colorinlistoftodos]{todonotes}
+
+\newcommand{\liststy}{\small\ttfamily}
+
+\newcommand{\fsize}{\fontsize{8pt}{10pt}\selectfont}
+\newcommand{\fsizesmall}{\fontsize{7.5pt}{3pt}\selectfont\ttfamily}
+\lstset{
+  basicstyle = \fsize,
+  identifierstyle = \fsize,
+  keywordstyle = \fsize\color[HTML]{DE285F},
+  keywordstyle = [2]\fsize\bfseries \color[HTML]{DE285F},
+  commentstyle = \fsize\color[HTML]{839496},
+  stringstyle = \fsize\color[HTML]{2429c9},
+  frame=single,
+  numbersep=2p,
+  showstringspaces=false,
+  language=sparql
+}
+
+
 \title{\textbf{Open Information Systems\\Final Report}}
 \subtitle{2015-2016 Vrije Universiteit Brussel\\Responsible tutor : Christophe Debruyne - chrdebru@vub.ac.be}
 \author{\textbf{Trackerspace}\\Matteo Marra - mmarra@vub.ac.be - 0525999 - 1M Comp Sci Soft\\Antoine Carpentier - antcarpe@vub.ac.be - 0529527 - 1M Comp Sci AI\\Titouan Christophe - tichrist@vub.ac.be - 0529190 - 1M Comp Sci Soft\\Bruno Rocha Pereira - brochape@vub.ac.be - 0529512 - 1M Comp Sci Soft}
@@ -73,13 +92,67 @@ Our dataset also include elevation of the tracks, which are therefore stored as 
 
 \chapter{Non trivial demonstrator}
 \section{The application}
-Our demonstrator provides an interface with a map where users are able to see all tracks in the displayed area, as well as the exercises spots along these tracks. The users are also able to find tracks by activity type. Moreover, given a track, a user will be able to find related exercises: exercises spots along the track, crossing or nearby tracks, or similar tracks by activity type or tags.
+Our demonstrator provides an interface with a map\footnote{http://leafletjs.com/} where users are able to see all tracks in the displayed area, as well as the exercises spots along these tracks. The users are also able to find tracks by activity type. Moreover, given a track, a user will be able to find related exercises: exercises spots along the track, crossing or nearby tracks, or similar tracks by activity type or tags.
 
 These functionalities can be found on buttons placed on the upper left of the map as buttons. The first button displays all the tracks that fit in the current shown map. The second one queries all the tracks that have at least once been used for biking and displays all of them on the map. The third and last button displays all the exercise spots on the map.
 
 Clicking on a track gives the user more queries to do. When a user selects a track, its URI is shown and 4 buttons appear. The user can then choose to either display all the intersecting tracks, the exercise spots related to it, all the exercises that involved that track as well as the tracks the share similar particularities(e.g. tags). 
+
 \section{Queries}
+Once the query endpoint was set up, different queries were written in order to display the data on the map. These queries will be explained in this section.
+
+The query \ref{query:alltracks} is pretty straightforward. It simply queries the triple store in order to fetch all the geometric data for all the tracks.
+
+The query \ref{query:tracksinbox} is a little bit more complicated. It takes arguments, which are in our application the boundaries of the map and then fetches all the tracks with the condition that the tracks are contained in the boundaries defined.
+
+The query \
+
+
+
+
+
 %description on what we achieved
 \chapter{Conclusions}
+\chapter*{Appendixes}
+\begin{lstlisting} [caption={Query for all tracks},label=query:alltracks]
+SELECT DISTINCT ?track ?geom
+WHERE {
+    ?track rdf:type tr:Track.
+    ?track geo:hasGeometry ?geom.
+}
+\end{lstlisting}
+
+\begin{lstlisting} [caption={Query for tracks in a defined box},label=query:tracksinbox]
+SELECT DISTINCT ?track ?geom
+WHERE {
+  ?track rdf:type tr:Track.
+  ?track geo:hasGeometry ?geom.
+  FILTER (
+    geof:sfContains(
+      STRDT("POLYGON((${lon1} ${lat1}, 
+      				  ${lon1} ${lat2}, 
+      				  ${lon2} ${lat2}, 
+      				  ${lon2} ${lat1}, 
+      				  ${lon1} ${lat1}))", 
+      	    sf:wktLiteral),
+      STRDT(?geom, sf:wktLiteral)
+    )
+  ).
+}
+\end{lstlisting}
+
+\begin{lstlisting} [caption={Query for tracks having an intersection with a specified track},label=query:trackscrossing]
+WHERE {
+  ?track rdf:type tr:Track.
+  ?track geo:hasGeometry ?geom.
+  <${track}> geo:hasGeometry ?x.
+  FILTER (
+    geof:sfIntersects(
+      STRDT(?x, sf:wktLiteral),
+      STRDT(?geom, sf:wktLiteral)
+    )
+  ).
+}
+\end{lstlisting}
 
 \end{document}
