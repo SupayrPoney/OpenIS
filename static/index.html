@@ -18,6 +18,18 @@
         body { margin:0; padding:0; }
         #map { position:fixed; top:0%; bottom:0; width:100%;}
         .sparql-template {display: none;}
+        .my-custom-control {
+            padding:5px 10px;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 11px;
+            line-height: 18px;
+            border-radius: 5px;
+        }
+
+        .my-custom-control:empty {
+            display: none;
+        }
   </style>
 </head>
 <body>
@@ -46,8 +58,41 @@
                   .fail(function(){alert("Error while querying!");});
         }
 
+        function showTrackExercises(track) {
+            var template = SPARQL.loadTemplate('getTrackExercises');
+
+            SPARQL.query(template({track: track}))
+                  .done(showData)
+                  .fail(function(){alert("Error while querying!");});
+        }
+
+        function showTrackSpots(track) {
+            var template = SPARQL.loadTemplate('getTrackSpots');
+            SPARQL.query(template({track: track}))
+                  .done(showSpots)
+                  .fail(function(){alert("Error while querying!");});
+        }
+
+        function showSimilarTracks(track) {
+            var template = SPARQL.loadTemplate('getSimilarTracks');
+            SPARQL.query(template({track: track}))
+                  .done(showTracks)
+                  .fail(function(){alert("Error while querying!");});
+        }
+
+        function showData(data) {
+            console.log(data);
+            var res = data.results.bindings;
+            var toShow = "";
+            for (var i=0; i < res.length; i++){
+                toShow += JSON.stringify(res[i], null, 4) + "\n";
+            }
+            alert(toShow);
+        }
+
         function showTracks(data){
             console.log(data);
+            deleteTracks();
 
             var res = data.results.bindings
             tracks = new L.FeatureGroup();
@@ -62,6 +107,18 @@
                 newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show intersecting tracks</button>").click(function(){
                     console.log(this);
                     showIntersectingTracks($(this).attr('data-track'));
+                }))
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show track exercises</button>").click(function(){
+                    console.log(this);
+                    showTrackExercises($(this).attr('data-track'));
+                }))
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show exercises spot near this track</button>").click(function(){
+                    console.log(this);
+                    showTrackSpots($(this).attr('data-track'));
+                }))
+                newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show similar tracks</button>").click(function(){
+                    console.log(this);
+                    showSimilarTracks($(this).attr('data-track'));
                 }))
                 track.bindPopup(newDom[0]);
                 track.addTo(tracks);
@@ -167,6 +224,7 @@
         ]}).addTo(map);
 
     });
+
     </script>
 
     <div class="sparql-template" id="getAllTracks">
@@ -221,6 +279,38 @@
             ?ex exont:HasType "Biking".
             ?ex ont:hasTrack ?track.
             ?track geo:hasGeometry ?geom.
+        }
+    </div>
+
+    <div class="sparql-template" id="getTrackExercises">
+        SELECT DISTINCT ?type ?duration ?rating ?review
+        WHERE {
+            ?exercise rdf:type exont:Exercise.
+            <${track}> ont:performed ?exercise.
+            ?exercise exont:HasType ?type.
+            ?exercise exont:Duration ?duration.
+            ?exercise exont:Rating ?rating.
+            ?exercise ont:hasReview ?review.
+        }
+    </div>
+
+    <div class="sparql-template" id="getTrackSpots">
+        SELECT DISTINCT ?exercise_spot ?geom
+        WHERE {
+            ?exercise_spot rdf:type ont:ExerciseSpot.
+            ?track rdf:type ont:Track.
+            ?exercise_spot ont:isAlongTrack <${track}>.
+            ?exercise_spot geo:hasGeometry ?geom.
+        }
+    </div>
+
+    <div class="sparql-template" id="getSimilarTracks">
+        SELECT DISTINCT ?track ?geom
+        WHERE {
+            ?track rdf:type ont:Track.
+            ?track geo:hasGeometry ?geom.
+            <${track}> ont:hasTags ?tag.
+            ?track ont:hasTags ?tag.
         }
     </div>
 </body>
