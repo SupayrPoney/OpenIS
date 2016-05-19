@@ -1,0 +1,17 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX sf: <http://www.opengis.net/ont/sf#>
+PREFIX spatial: <http://jena.apache.org/spatial#>
+PREFIX uom: <http://www.opengis.net/def/uom/OGC/1.0/>
+
+PREFIX ont: <http://openis.ititou.be/ont#>
+
+SELECT DISTINCT ?track ?geom ?dis
+WHERE {
+    ?track rdf:type ont:Track.
+    ?track geo:hasGeometry ?geom.
+    LET (?dis := geof:distance(STRDT(?geom, sf:wktLiteral), STRDT("POINT(4.15 51)", sf:wktLiteral), uom:metre)).
+    FILTER(?dis < 100000).
+}
