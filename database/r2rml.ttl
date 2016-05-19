@@ -21,7 +21,8 @@
            track_id,
            name AS has_type,
            grade,
-           review
+           review,
+           calories
     FROM record
     LEFT JOIN activity_type ON activity_type_id = activity_type.id
     LEFT JOIN rating ON rating.record_id = record.id
@@ -55,6 +56,11 @@
     rr:predicateObjectMap [
         rr:predicate tr:hasReview;
         rr:objectMap [rr:column "review"];
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:NumberOfCalories;
+        rr:objectMap [rr:column "calories"];
     ];
 
     rr:predicateObjectMap [

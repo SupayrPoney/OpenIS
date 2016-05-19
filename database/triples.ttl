@@ -1,4 +1,48 @@
 
+<http://tracker.space/exercise/1/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Running" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#NumberOfCalories> "4.58E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "10"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "6.633E3"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://tracker.space/exercise/2/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Biking" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#NumberOfCalories> "8.41E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "3"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "2.972E3"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://tracker.space/exercise/3/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Biking" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Rating> "2"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://openis.ititou.be/ont#hasReview> "Too long, I was rapidly tired" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#NumberOfCalories> "5.470000000000001E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "7"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "2.9110000000000005E3"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://tracker.space/exercise/4/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Horse backriding" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://openis.ititou.be/ont#hasReview> "Yeah really good track, loved it" ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#NumberOfCalories> "5.0200000000000005E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
+	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "3.847E3"^^<http://www.w3.org/2001/XMLSchema#double> .
+
+<http://tracker.space/exercise/1/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/10> .
+
+<http://tracker.space/exercise/2/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/3> .
+
+<http://tracker.space/exercise/3/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/7> .
+
+<http://tracker.space/exercise/4/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/4> .
+
+<http://tracker.space/exercise/1/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/1> .
+
+<http://tracker.space/exercise/2/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/2> .
+
+<http://tracker.space/exercise/3/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/3> .
+
+<http://tracker.space/exercise/4/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/4> .
+
 <http://tracker.space/track/2> <http://openis.ititou.be/ont#hasTags> "Nature" , "Pic Nic" .
 
 <http://tracker.space/track/3> <http://openis.ititou.be/ont#hasTags> "Nature" .
@@ -12,24 +56,24 @@
 <http://tracker.space/track/7> <http://openis.ititou.be/ont#hasTags> "Fountain" .
 
 <http://tracker.space/person/1> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
+	<http://dbpedia.org/ontology/Person#weight> "8.0E1"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#height> "1.8E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "male" ;
-	<http://dbpedia.org/ontology/Person#weight> "8.0E1"^^<http://www.w3.org/2001/XMLSchema#double> .
+	<http://dbpedia.org/ontology/Person#sex> "male" .
 
 <http://tracker.space/person/2> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
+	<http://dbpedia.org/ontology/Person#weight> "6.5E1"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#height> "1.6199999999999999E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "female" ;
-	<http://dbpedia.org/ontology/Person#weight> "6.5E1"^^<http://www.w3.org/2001/XMLSchema#double> .
+	<http://dbpedia.org/ontology/Person#sex> "female" .
 
 <http://tracker.space/person/3> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
+	<http://dbpedia.org/ontology/Person#weight> "1.08E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#height> "2.07E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "male" ;
-	<http://dbpedia.org/ontology/Person#weight> "1.08E2"^^<http://www.w3.org/2001/XMLSchema#double> .
+	<http://dbpedia.org/ontology/Person#sex> "male" .
 
 <http://tracker.space/person/4> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Person> ;
+	<http://dbpedia.org/ontology/Person#weight> "5.7E1"^^<http://www.w3.org/2001/XMLSchema#double> ;
 	<http://dbpedia.org/ontology/Person#height> "1.52E2"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://dbpedia.org/ontology/Person#sex> "female" ;
-	<http://dbpedia.org/ontology/Person#weight> "5.7E1"^^<http://www.w3.org/2001/XMLSchema#double> .
+	<http://dbpedia.org/ontology/Person#sex> "female" .
 
 <http://tracker.space/person/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://tracker.space/user/1> .
 
@@ -38,98 +82,6 @@
 <http://tracker.space/person/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://tracker.space/user/3> .
 
 <http://tracker.space/person/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#PersonOf> <http://tracker.space/user/4> .
-
-<http://tracker.space/exercise_spot/1> a <http://openis.ititou.be/ont#ExerciseSpot> ;
-	<http://www.opengis.net/ont/geosparql#hasGeometry> "GEOMETRYCOLLECTION(POINT(4.372454 50.812064))" ;
-	<http://openis.ititou.be/ont#isAlongTrack> <http://tracker.space/track/1> .
-
-<http://tracker.space/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2012-12-21T11:11:11"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-
-<http://tracker.space/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2013-12-21T12:12:12"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-
-<http://tracker.space/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2014-12-21T13:13:13"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-
-<http://tracker.space/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2015-11-13T17:38:14"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
-
-<http://tracker.space/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/1> .
-
-<http://tracker.space/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/2> .
-
-<http://tracker.space/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/3> .
-
-<http://tracker.space/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/4> .
-
-<http://tracker.space/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/1/> .
-
-<http://tracker.space/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/2/> .
-
-<http://tracker.space/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/3/> .
-
-<http://tracker.space/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/4/> .
-
-<http://tracker.space/user/1> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
-
-<http://tracker.space/user/2> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
-
-<http://tracker.space/user/3> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
-
-<http://tracker.space/user/4> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
-
-<http://tracker.space/user/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/1> .
-
-<http://tracker.space/user/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/2> .
-
-<http://tracker.space/user/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/3> .
-
-<http://tracker.space/user/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/4> .
-
-<http://tracker.space/user/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/1> .
-
-<http://tracker.space/user/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/2> .
-
-<http://tracker.space/user/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/3> .
-
-<http://tracker.space/user/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/4> .
-
-<http://tracker.space/exercise/1/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "6.633E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Running" ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "10"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://tracker.space/exercise/2/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "2.972E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Biking" ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://tracker.space/exercise/3/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
-	<http://openis.ititou.be/ont#hasReview> "Too long, I was rapidly tired" ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "2.9110000000000005E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Biking" ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Rating> "2"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "7"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://tracker.space/exercise/4/> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#Exercise> ;
-	<http://openis.ititou.be/ont#hasReview> "Yeah really good track, loved it" ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Duration> "3.847E3"^^<http://www.w3.org/2001/XMLSchema#double> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasType> "Horse backriding" ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> ;
-	<http://webprotege.stanford.edu/ontologies/ExerciseOntology#Equipment> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
-
-<http://tracker.space/exercise/1/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/1> .
-
-<http://tracker.space/exercise/2/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/2> .
-
-<http://tracker.space/exercise/3/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/3> .
-
-<http://tracker.space/exercise/4/> <http://openis.ititou.be/ont#ExerciseIn> <http://tracker.space/workout/4> .
-
-<http://tracker.space/exercise/1/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/10> .
-
-<http://tracker.space/exercise/2/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/3> .
-
-<http://tracker.space/exercise/3/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/7> .
-
-<http://tracker.space/exercise/4/> <http://openis.ititou.be/ont#hasTrack> <http://tracker.space/track/4> .
 
 <http://tracker.space/track/1> a <http://openis.ititou.be/ont#Track> ;
 	<http://openis.ititou.be/ont#hasLength> "10529"^^<http://www.w3.org/2001/XMLSchema#integer> ;
@@ -178,3 +130,55 @@
 <http://tracker.space/track/3> <http://openis.ititou.be/ont#performed> <http://tracker.space/exercise/3/> .
 
 <http://tracker.space/track/4> <http://openis.ititou.be/ont#performed> <http://tracker.space/exercise/4/> .
+
+<http://tracker.space/user/1> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
+
+<http://tracker.space/user/2> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
+
+<http://tracker.space/user/3> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
+
+<http://tracker.space/user/4> a <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserAccount> .
+
+<http://tracker.space/user/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/1> .
+
+<http://tracker.space/user/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/2> .
+
+<http://tracker.space/user/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/3> .
+
+<http://tracker.space/user/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#UserOf> <http://tracker.space/workout/4> .
+
+<http://tracker.space/user/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/1> .
+
+<http://tracker.space/user/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/2> .
+
+<http://tracker.space/user/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/3> .
+
+<http://tracker.space/user/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#OwnedByPerson> <http://tracker.space/person/4> .
+
+<http://tracker.space/exercise_spot/1> a <http://openis.ititou.be/ont#ExerciseSpot> ;
+	<http://www.opengis.net/ont/geosparql#hasGeometry> "GEOMETRYCOLLECTION(POINT(4.372454 50.812064))" ;
+	<http://openis.ititou.be/ont#isAlongTrack> <http://tracker.space/track/1> .
+
+<http://tracker.space/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2012-12-21T11:11:11"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://tracker.space/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2013-12-21T12:12:12"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://tracker.space/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2014-12-21T13:13:13"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://tracker.space/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasDate> "2015-11-13T17:38:14"^^<http://www.w3.org/2001/XMLSchema#dateTime> .
+
+<http://tracker.space/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/1/> .
+
+<http://tracker.space/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/2/> .
+
+<http://tracker.space/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/3/> .
+
+<http://tracker.space/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasExercise> <http://tracker.space/exercise/4/> .
+
+<http://tracker.space/workout/1> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/1> .
+
+<http://tracker.space/workout/2> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/2> .
+
+<http://tracker.space/workout/3> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/3> .
+
+<http://tracker.space/workout/4> <http://webprotege.stanford.edu/ontologies/ExerciseOntology#HasUser> <http://tracker.space/user/4> .
