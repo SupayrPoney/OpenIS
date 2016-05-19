@@ -1,3 +1,4 @@
+# Find exercise spots long track #1
 
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
@@ -8,6 +9,6 @@ PREFIX ont: <http://openis.ititou.be/ont#>
 SELECT DISTINCT ?exercise_spot ?geom
 WHERE {
     ?exercise_spot rdf:type ont:ExerciseSpot
-    ?exercise_spot ont:isAlongTrack <http://localhost/track/1>.
+    ?exercise_spot ont:isAlongTrack <http://tracker.space/track/1>.
     ?exercise_spot geo:hasGeometry ?geom.
 }
