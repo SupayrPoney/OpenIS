@@ -5,6 +5,9 @@
 \usepackage{amsfonts}
 \usepackage{titling}
 \usepackage{amssymb}
+\usepackage{hyperref}
+
+
 \usepackage[colorinlistoftodos]{todonotes}
 \title{\textbf{Open Information Systems\\Final Report}}
 \subtitle{2015-2016 Vrije Universiteit Brussel\\Responsible tutor : Christophe Debruyne - chrdebru@vub.ac.be}
@@ -51,10 +54,23 @@ In this ontology we define a \texttt{Track} and an \texttt{ExerciseSpot} that ar
 We also define many properties like \texttt{isAlongTrack}, \texttt{hasTrack}, \texttt{performed}, \texttt{hasTags} and \texttt{hasReview}, that complete the set of data we have stored in our application.
 
 \chapter{Tools}
-\section{Parliament}
-%brief on what is parliament and describe how and why we used it
-\section{db2triples}
+\section{PostgreSQL and db2triples}
+As we mentioned in earlier reports, we use PostgreSQL and PostGis to prepare our data in relational tables. We then use db2triples \footnote{\url{https://github.com/chrdebru/db2triples}} to map our entities to RDF triples. Our mapping is written in the r2rml language \footnote{\url{https://www.w3.org/TR/r2rml/}}, using the Turtle syntax. The mapping file is called \texttt{r2rml.ttl}.
 %brief on db2triples, problems we had mapping to the geosparql
+
+\section{Parliament}
+Finally, we use Parliament \footnote{\url{http://parliament.semwebcentral.org/}} as our triple store. Parliament provide an indexed triples database, a web based data explorer, and a SPARQL endpoint which notably supports the geographical functions, needed to perform geospatial querying. Our demonstrator uses Parliament's SPARQL endpoint.
+
+\section{Some issues we encounterd with the tools}
+\subsection{Conversion to WKT format}
+We spent some time trying to convert the geometries stored in PostGIS to WKT litterals using r2rml functions in db2triples. We also tried to make our triples using the GeoTriples \footnote{\url{https://github.com/LinkedEOData/GeoTriples}} tool. After many unsuccesful attempts, we finally found an easier way to it, using PostGIS. Using the \texttt{ST\_AsText} function, we convert the data to the Well Known Text format in the database query, and db2triples only cpoies it as a string in our triples. Since our specific ontology defines tracks and exercices spots as \texttt{geo:Feature} subclass, all the reasoners that might use our dataset will use those objects as geometries.
+
+\subsection{Coordinates order in geometries}
+Our initial dataset, provided in a previous iteration, included geographical data where coordinates where given in the format \texttt{latitude, longitude}. However, as we did not pay attention to this aspect before, other GIS applications and libraries use the format \texttt{longitude, latitude}. Therefore, in our first trials to query our dataset in SPARQL and display it on a map, we encountered bugs, such as erronated track lengths and tracks not found in a certain bounding box. We then converted our dataset to the \texttt{longitude, latitude} format to fit the GIS ontology.
+
+\subsection{Elevation}
+Our dataset also include elevation of the tracks, which are therefore stored as \texttt{LINESTRING Z} GIS types. Our first trials with GeoSPARQL queries didn't return any results, and we found out that projecting tracks in 2 dimensions (using PostGIS \texttt{ST\_Force2D} function in the mapping query) fixed the problem. We didn't had much time to investigate wether we could do it in GeoSPARQL. Also, the javascript library we use to convert geometries from WKT to geojson in our demonstrator, Wellknown.js \footnote{\url{https://github.com/mapbox/wellknown}}, does not support 3D geometries.
+
 \chapter{Non trivial demonstrator}
 \section{The application}
 \section{Queries}
