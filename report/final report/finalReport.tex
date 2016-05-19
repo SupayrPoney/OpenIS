@@ -82,13 +82,13 @@ Finally, we use Parliament \footnote{\url{http://parliament.semwebcentral.org/}}
 
 \section{Some issues we encounterd with the tools}
 \subsection{Conversion to WKT format}
-We spent some time trying to convert the geometries stored in PostGIS to WKT litterals using r2rml functions in db2triples. We also tried to make our triples using the GeoTriples \footnote{\url{https://github.com/LinkedEOData/GeoTriples}} tool. After many unsuccesful attempts, we finally found an easier way to it, using PostGIS. Using the \texttt{ST\_AsText} function, we convert the data to the Well Known Text format in the database query, and db2triples only cpoies it as a string in our triples. Since our specific ontology defines tracks and exercices spots as \texttt{geo:Feature} subclass, all the reasoners that might use our dataset will use those objects as geometries.
+We spent some time trying to convert the geometries stored in PostGIS to WKT litterals using r2rml functions in db2triples. We also tried to make our triples using the GeoTriples \footnote{\url{https://github.com/LinkedEOData/GeoTriples}} tool. After many unsuccesful attempts, we finally found an easier way to it, using PostGIS. Using the \texttt{ST\_AsText} function, we convert the data to the Well Known Text format in the database query, and db2triples only copies it as a string in our triples. Since our specific ontology defines tracks and exercices spots as \texttt{geo:Feature} subclass, all the reasoners that might use our dataset will use those objects as geometries.
 
 \subsection{Coordinates order in geometries}
 Our initial dataset, provided in a previous iteration, included geographical data where coordinates where given in the format \texttt{latitude, longitude}. However, as we did not pay attention to this aspect before, other GIS applications and libraries use the format \texttt{longitude, latitude}. Therefore, in our first trials to query our dataset in SPARQL and display it on a map, we encountered bugs, such as erronated track lengths and tracks not found in a certain bounding box. We then converted our dataset to the \texttt{longitude, latitude} format to fit the GIS ontology.
 
 \subsection{Elevation}
-Our dataset also include elevation of the tracks, which are therefore stored as \texttt{LINESTRING Z} GIS types. Our first trials with GeoSPARQL queries didn't return any results, and we found out that projecting tracks in 2 dimensions (using PostGIS \texttt{ST\_Force2D} function in the mapping query) fixed the problem. We didn't had much time to investigate wether we could do it in GeoSPARQL. Also, the javascript library we use to convert geometries from WKT to geojson in our demonstrator, Wellknown.js \footnote{\url{https://github.com/mapbox/wellknown}}, does not support 3D geometries.
+Our dataset also include elevation of the tracks, which are therefore stored as \texttt{LINESTRING Z} GIS types. Our first trials with GeoSPARQL queries didn't return any results, and we found out that projecting tracks in 2 dimensions (using PostGIS \texttt{ST\_Force2D} function in the mapping query) fixed the problem. We didn't have much time to investigate wether we could do it in GeoSPARQL or not. Also, the javascript library we use to convert geometries from WKT to geojson in our demonstrator, Wellknown.js \footnote{\url{https://github.com/mapbox/wellknown}}, does not support 3D geometries.
 
 \chapter{Non trivial demonstrator}
 \section{The application}
@@ -99,13 +99,17 @@ These functionalities can be found on buttons placed on the upper left of the ma
 Clicking on a track gives the user more queries to do. When a user selects a track, its URI is shown and 4 buttons appear. The user can then choose to either display all the intersecting tracks, the exercise spots related to it, all the exercises that involved that track as well as the tracks the share similar particularities(e.g. tags). 
 
 \section{Queries}
-Once the query endpoint was set up, different queries were written in order to display the data on the map. These queries will be explained in this section.
+Once the query endpoint\footnote{http://openis.ititou.be:8080/parliament/sparql} was set up, different queries were written in order to display the data on the map. These queries will be explained in this section. 
 
 The query \ref{query:alltracks} is pretty straightforward. It simply queries the triple store in order to fetch all the geometric data for all the tracks.
 
 The query \ref{query:tracksinbox} is a little bit more complicated. It takes arguments, which are in our application the boundaries of the map and then fetches all the tracks with the condition that the tracks are contained in the boundaries defined.
 
-The query \
+The query \ref{query:trackscrossing} uses the geosparql function \texttt{sfIntersects()} in order to get all the tracks that have an intersection with the specified track. This would allow a user to, for example, know where he can change track.
+
+Another useful piece of information a user would need is how to find tracks close to a particular place (e.g. his workplace or home). This is achieved by the query \ref{query:tracksbiking}.
+
+The last type of query we used as an example allows us to get all the tracks that have been used for a particular activity. Query \ref{query:tracksbiking} shows an example for the biking activity.
 
 
 
@@ -114,6 +118,15 @@ The query \
 %description on what we achieved
 \chapter{Conclusions}
 \chapter*{Appendixes}
+\begin{lstlisting}[caption={Prefixes used in the hereinbelow queries},label=query:prefixes]
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX sf: <http://www.opengis.net/ont/sf#>
+PREFIX exont: <http://webprotege.stanford.edu/ontologies/ExerciseOntology#>
+PREFIX ont: <http://openis.ititou.be/ont#>
+PREFIX tr: <http://openis.ititou.be/ont#>
+\end{lstlisting}
 \begin{lstlisting} [caption={Query for all tracks},label=query:alltracks]
 SELECT DISTINCT ?track ?geom
 WHERE {
@@ -153,6 +166,38 @@ WHERE {
     )
   ).
 }
+\end{lstlisting}
+\pagebreak
+\begin{lstlisting} [caption={Query for tracks used at least once for biking},label=query:tracksbiking]
+SELECT DISTINCT ?ex ?track ?geom
+WHERE {
+    ?ex rdf:type exont:Exercise.
+    ?ex exont:HasType "Biking".
+    ?ex ont:hasTrack ?track.
+    ?track geo:hasGeometry ?geom.
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Query for tracks within a specified distance of a point }, label = query:tracksbiking ]
+SELECT DISTINCT ?track ?geom ?dis
+WHERE {
+    ?track rdf:type ont:Track.
+    ?track geo:hasGeometry ?geom.
+    LET (?dis := geof:distance( 
+    				STRDT(?geom, sf:wktLiteral), 
+    				STRDT("POINT(4.15 51)", sf:wktLiteral),
+    				uom:metre)).
+    FILTER(?dis < $(dist)).
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption={Query for tracks with a tag common with a specified track }, label = query:tracksbiking ]
+SELECT DISTINCT ?track ?geom
+WHERE {
+    ?track rdf:type ont:Track.
+    ?track geo:hasGeometry ?geom.
+    <${track}> ont:hasTags ?tag.
+    ?track ont:hasTags ?tag.
 \end{lstlisting}
 
 \end{document}
