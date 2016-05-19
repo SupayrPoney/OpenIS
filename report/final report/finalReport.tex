@@ -57,6 +57,11 @@ We also define many properties like \texttt{isAlongTrack}, \texttt{hasTrack}, \t
 %brief on db2triples, problems we had mapping to the geosparql
 \chapter{Non trivial demonstrator}
 \section{The application}
+Our demonstrator provides an interface with a map where users are able to see all tracks in the displayed area, as well as the exercises spots along these tracks. The users are also able to find tracks by activity type. Moreover, given a track, a user will be able to find related exercises: exercises spots along the track, crossing or nearby tracks, or similar tracks by activity type or tags.
+
+These functionalities can be found on buttons placed on the upper left of the map as buttons. The first button displays all the tracks that fit in the current shown map. The second one queries all the tracks that have at least once been used for biking and displays all of them on the map. The third and last button displays all the exercise spots on the map.
+
+Clicking on a track gives the user more queries to do. When a user selects a track, its URI is shown and 4 buttons appear. The user can then choose to either display all the intersecting tracks, the exercise spots related to it, all the exercises that involved that track as well as the tracks the share similar particularities(e.g. tags). 
 \section{Queries}
 %description on what we achieved
 \chapter{Conclusions}
