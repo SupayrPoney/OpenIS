@@ -24,7 +24,7 @@ const SPARQL = {
     },
 
     update: function (Q) {
-        var payload = {query: this.PREFIX + Q};
+        var payload = {update: this.PREFIX + Q};
         console.log(payload.query);
         return $.post(this.ENDPOINT, payload);
     },
