@@ -80,6 +80,13 @@
                   .fail(function(){alert("Error while querying!");});
         }
 
+        function addExercise(id, track, type, calories, duration, rating, review) {
+            var template = SPARQL.loadTemplate('addExercise');
+            SPARQL.query(template({id: id, track: track, type: type, calories: calories, duration: duration, rating: rating, review: review}))
+                  .done(function(){alert("Data inserted!");})
+                  .fail(function(){alert("Error while querying!");});
+        }
+
         function showData(data) {
             console.log(data);
             var res = data.results.bindings;
@@ -120,6 +127,21 @@
                     console.log(this);
                     showSimilarTracks($(this).attr('data-track'));
                 }))
+                addExerciseForm = $($("#addExerciseForm").html());
+                addExerciseForm.append($("<input type=\"hidden\" value=\"" + trackValue + "\" />"));
+                addExerciseForm.submit(function(){
+                    console.log(this);
+                    var type = this.elements[0].value;
+                    var duration = this.elements[1].value;
+                    var calories = this.elements[2].value;
+                    var rating = this.elements[3].value;
+                    var review = this.elements[4].value;
+                    var track = this.elements[6].value;
+                    alert(type);
+                    alert(track);
+                    addExercise(new Date().getTime(), track, type, duration, calories, rating, review);
+                });
+                newDom.append(addExerciseForm);
                 track.bindPopup(newDom[0]);
                 track.addTo(tracks);
             }
@@ -227,6 +249,17 @@
 
     </script>
 
+    <div id="addExerciseForm">
+        <form>
+            <label>Type</label><input type="text"><br />
+            <label>Duration</label><input type="text"><br />
+            <label>Calories</label><input type="text"><br />
+            <label>Rating</label><input type="text"><br />
+            <label>Review</label><input type="text"><br />
+            <input type="submit" value="Add exercise to this track"/>
+        </form>
+    </div>
+
     <div class="sparql-template" id="getAllTracks">
         SELECT DISTINCT ?track ?geom
         WHERE {
@@ -311,6 +344,29 @@
             ?track geo:hasGeometry ?geom.
             <${track}> ont:hasTags ?tag.
             ?track ont:hasTags ?tag.
+        }
+    </div>
+
+    <div class="sparql-template" id="addExercise">
+        INSERT DATA
+        {
+            <http://tracker.space/exercise/${id}/>
+                <exont:HasType> ${type}^^<xs:string> ;
+                <exont:NumberOfCalories> ${calories}^^<xs:double> ;
+                <exont:Equipment> ${track}^^<xs:integer> ;
+                <exont:Duration> ${duration}^^<xs:double> ;
+                <exont:Rating> ${rating}^^<xs:integer> ;
+                <ont:hasReview> ${review}^^<xs:string> ;
+                <ont:hasTrack> <http://tracker.space/track/${track}> ;
+                <ont:ExerciseIn> <http://tracker.space/workout/${id}> .
+
+            <http://tracker.space/track/${track}> <ont:performed> <http://tracker.space/exercise/${id}/> .
+
+            <http://tracker.space/user/1> <exont:UserOf> <http://tracker.space/workout/${id}> .
+
+            <http://tracker.space/workout/${id}> 
+                <exont:HasDate> ${date}^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+                <exont:HasExercice> <http://track.space/exercise/${id}/>.
         }
     </div>
 </body>
