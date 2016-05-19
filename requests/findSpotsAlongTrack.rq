@@ -9,6 +9,6 @@ PREFIX ont: <http://openis.ititou.be/ont#>
 SELECT DISTINCT ?exercise_spot ?geom
 WHERE {
     ?exercise_spot rdf:type ont:ExerciseSpot
-    ?exercise_spot ont:isAlongTrack <http://localhost/track/1>.
+    ?exercise_spot ont:isAlongTrack <http://tracker.space/track/1>.
     ?exercise_spot geo:hasGeometry ?geom.
 }

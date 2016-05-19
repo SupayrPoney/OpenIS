@@ -12,7 +12,7 @@ SELECT DISTINCT ?track ?geom
 WHERE {
     ?track rdf:type ont:Track.
     ?track geo:hasGeometry ?geom.
-    <http://localhost/track/1> geo:hasGeometry ?x.
+    <http://tracker.space/track/1> geo:hasGeometry ?x.
 
     FILTER (
         geof:sfIntersects(STRDT(?x, sf:wktLiteral), STRDT(?geom, sf:wktLiteral))

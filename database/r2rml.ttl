@@ -27,9 +27,8 @@
     LEFT JOIN rating ON rating.record_id = record.id
     """];
 
-    # Could also put Exercise-track and Exercise-spot endpoints
     rr:subjectMap [
-        rr:template "http://localhost/exercise/{ID}/";
+        rr:template "http://tracker.space/exercise/{ID}/";
         rr:class ex:Exercise;
     ];
 
@@ -90,7 +89,7 @@
     """];
 
     rr:subjectMap [
-        rr:template "http://localhost/person/{ID}";
+        rr:template "http://tracker.space/person/{ID}";
         rr:class ex:Person;
     ];
 
@@ -129,7 +128,7 @@
     """];
 
     rr:subjectMap [
-        rr:template "http://localhost/user/{ID}";
+        rr:template "http://tracker.space/user/{ID}";
         rr:class ex:UserAccount;
     ];
 
@@ -166,7 +165,7 @@
     """];
 
     rr:subjectMap [
-        rr:template "http://localhost/track/{id}";
+        rr:template "http://tracker.space/track/{id}";
         rr:class tr:Track;
     ];
 
@@ -192,6 +191,7 @@
     ];
 .
 
+
 <#ExerciseSpotTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
@@ -199,7 +199,7 @@
     """];
 
     rr:subjectMap [
-        rr:template "http://localhost/exercise_spot/{id}";
+        rr:template "http://tracker.space/exercise_spot/{id}";
         rr:class tr:ExerciseSpot;
     ];
     
@@ -220,14 +220,20 @@
     ];
 .
 
+
 <#WorkoutTripleMap>
     rdf:type rr:TriplesMap;
     rr:logicalTable [rr:sqlQuery """
-    SELECT id FROM record
+    SELECT id, start_time FROM record
     """];
 
     rr:subjectMap [
-        rr:template "http://localhost/workout/{id}";
+        rr:template "http://tracker.space/workout/{id}";
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ex:HasDate;
+        rr:objectMap [rr:column "start_time"];
     ];
 
     rr:predicateObjectMap [
@@ -256,7 +262,7 @@
 <#TagTripleMap>
     rr:logicalTable [rr:tableName "tagged"];
     rr:subjectMap [
-        rr:template "http://localhost/track/{track_id}";
+        rr:template "http://tracker.space/track/{track_id}";
     ];
     rr:predicateObjectMap [
       rr:predicate tr:hasTags;
