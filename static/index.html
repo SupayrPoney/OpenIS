@@ -18,7 +18,7 @@
     <style>
         body { margin:0; padding:0; }
         #map { position:fixed; top:0%; bottom:0; width:100%;}
-        .sparql-template {display: none;}
+        .sparql-template, #addExerciseForm {display: none;}
         .my-custom-control {
             padding:5px 10px;
             background: rgba(0,0,0,0.5);
@@ -83,10 +83,27 @@
 
         function addExercise(track, type, calories, duration, rating, review) {
             var template = SPARQL.loadTemplate('addExercise');
-            var payload = {id: new Date().getTime().toString(), track: track, type: type, calories: calories, duration: duration, rating: rating, review: review, date: new Date()};
-            SPARQL.update(template(payload))
-                  // .done(function(){alert("Data inserted!");})
-                  // .fail(function(){alert("Error while querying!");});
+            var payload = {
+                id: new Date().getTime().toString(),
+                track: track,
+                type: type,
+                calories: calories,
+                duration: duration,
+                rating: rating,
+                review: review,
+                date: new Date()
+            };
+            SPARQL.update(template(payload));
+        }
+
+        function addTrack(linestring){
+            var template = SPARQL.loadTemplate('addTrack');
+            var args = {
+                id: new Date().getTime().toString(),
+                linestring: linestring
+            };
+            console.log(linestring);
+            SPARQL.update(template(payload));
         }
 
         function showData(data) {
@@ -117,25 +134,20 @@
                 var trackValue = res[i].track.value;
                 var newDom = $("<span> <pre>" + trackValue + "</pre></span>");
                 newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show intersecting tracks</button>").click(function(){
-                    console.log(this);
                     showIntersectingTracks($(this).attr('data-track'));
                 }))
                 newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show track exercises</button>").click(function(){
-                    console.log(this);
                     showTrackExercises($(this).attr('data-track'));
                 }))
                 newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show exercises spot near this track</button>").click(function(){
-                    console.log(this);
                     showTrackSpots($(this).attr('data-track'));
                 }))
                 newDom.append($("<button data-track=\"" + trackValue + "\" type=\"button\">Show similar tracks</button>").click(function(){
-                    console.log(this);
                     showSimilarTracks($(this).attr('data-track'));
                 }))
                 addExerciseForm = $($("#addExerciseForm").html());
                 addExerciseForm.append($("<input type=\"hidden\" value=\"" + trackValue + "\" />"));
                 addExerciseForm.submit(function(){
-                    console.log(this);
                     var type = this.elements[0].value;
                     var duration = this.elements[1].value;
                     var calories = this.elements[2].value;
@@ -263,6 +275,7 @@
                         var wkt = 'LINESTRING(' + coords.map(function(x){
                             return x[0] + ' ' + x[1];
                         }).join(',') + ')';
+                        addTrack(wkt);
                     }
                 }
             }
@@ -273,12 +286,15 @@
 
     <div id="addExerciseForm">
         <form>
-            <label>Type</label><input type="text"><br />
-            <label>Duration</label><input type="text"><br />
-            <label>Calories</label><input type="text"><br />
-            <label>Rating</label><input type="text"><br />
-            <label>Review</label><input type="text"><br />
-            <input type="submit" value="Add exercise to this track"/>
+            <h4>I exercised on this track !</h4>
+            <table>
+                <tr><td><label>Type</label></td><td><input type="text"></td></tr>
+                <tr><td><label>Duration</label></td><td><input type="text"></td></tr>
+                <tr><td><label>Calories</label></td><td><input type="text"></td></tr>
+                <tr><td><label>Rating</label></td><td><input type="text"></td></tr>
+                <tr><td><label>Review</label></td><td><input type="text"></td></tr>
+            </table>
+            <input type="submit" value="Upload my calories!"/>
         </form>
     </div>
 
@@ -372,7 +388,7 @@
     <div class="sparql-template" id="addExercise">
         INSERT DATA
         {
-            &lt;http://tracker.space/exercise/${id}/&gt;
+            <http://tracker.space/exercise/${id}/>
                 rdf:type exont:Exercise ;
                 exont:HasType "${type}" ;
                 exont:NumberOfCalories "${calories}"^^xs:double ;
@@ -380,16 +396,26 @@
                 exont:Duration "${duration}"^^xs:double ;
                 exont:Rating "${rating}"^^xs:integer ;
                 ont:hasReview "${review}" ;
-                ont:hasTrack &lt;${track}&gt; ;
-                ont:ExerciseIn &lt;http://tracker.space/workout/${id}&gt; .
+                ont:hasTrack <${track}> ;
+                ont:ExerciseIn <http://tracker.space/workout/${id}> .
 
-            &lt;${track}&gt; ont:performed &lt;http://tracker.space/exercise/${id}/&gt; .
+            <${track}> ont:performed <http://tracker.space/exercise/${id}/> .
 
-            &lt;http://tracker.space/user/1&gt; exont:UserOf &lt;http://tracker.space/workout/${id}&gt; .
+            <http://tracker.space/user/1> exont:UserOf <http://tracker.space/workout/${id}> .
 
-            &lt;http://tracker.space/workout/${id}&gt; 
+            <http://tracker.space/workout/${id}> 
                 exont:HasDate "${date}"^^xs:dateTime ;
-                exont:HasExercice &lt;http://track.space/exercise/${id}/&gt;.
+                exont:HasExercice <http://track.space/exercise/${id}/>.
+        }
+    </div>
+
+    <div class="sparql-template" id="addTrack">
+        INSERT DATA
+        {
+            <http://tracker.space/track/${id}>
+                rdf:type tr:Track;
+                tr:hasLength geof:length(STRDT("${linestring}", sf:wktLiteral));
+                tr:hasGeometry ${linestring}.
         }
     </div>
 </body>
