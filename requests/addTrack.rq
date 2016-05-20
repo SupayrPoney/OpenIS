@@ -1,0 +1,17 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX sf: <http://www.opengis.net/ont/sf#>
+PREFIX spatial: <http://jena.apache.org/spatial#>
+PREFIX uom: <http://www.opengis.net/def/uom/OGC/1.0/>
+PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
+
+
+PREFIX tr: <http://openis.ititou.be/ont#>
+
+
+INSERT DATA {
+  <http://tracker.space/42> a tr:Track;
+    # tr:hasLength geof:length(STRDT("LINESTRING(4.33225 50.83625,4.33222 50.83627,4.33217 50.83629,4.33213 50.83631,4.33209 50.83632,4.33203 50.83634,4.33197 50.83638,4.33191 50.8364)", sf:wktLiteral));
+    geo:hasGeometry "LINESTRING(4.33225 50.83625,4.33222 50.83627,4.33217 50.83629,4.33213 50.83631,4.33209 50.83632,4.33203 50.83634,4.33197 50.83638,4.33191 50.8364)".
+}
