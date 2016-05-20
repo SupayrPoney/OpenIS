@@ -98,6 +98,14 @@ We also define many properties like \texttt{isAlongTrack}, \texttt{hasTrack}, \t
 
 The visualization of our own ontology was alzo realized with WEBVOWL\footnote{\url{http://vowl.visualdataweb.org/webvowl.html}} and is represented in figure \ref{db:ownont}
 
+\section{Mapping from relational to triples}
+
+The mapping of the \texttt{User} entity is straight-forward. We use the same \texttt{ID} for both the \texttt{Person} and \texttt{UserAccount} ontologies.
+
+To map the \texttt{Record} entity, we create a dummy \texttt{Workout} triple to use as a link between the \texttt{UserAccount} and the \texttt{Exercise} that the \texttt{Record} entity maps directly to. We do that to respect the exercise ontology and because our application does not make use of \texttt{Workout}.
+
+The mapping of \texttt{Track} and \texttt{ExerciseSpot} is straight-forward.
+
 \chapter{Tools}
 \section{PostgreSQL and db2triples}
 As we mentioned in earlier reports, we use PostgreSQL and PostGis to prepare our data in relational tables. The ER diagram can be found in the appendix\ref{db:er}.  We then use db2triples \footnote{\url{https://github.com/chrdebru/db2triples}} to map our entities to RDF triples. Our mapping is written in the r2rml language \footnote{\url{https://www.w3.org/TR/r2rml/}}, using the Turtle syntax. The mapping file is called \texttt{r2rml.ttl}.
