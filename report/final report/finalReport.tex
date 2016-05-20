@@ -77,6 +77,8 @@ To map to the concept of \texttt{Equipment}, that is a property of an \texttt{Ex
 This showed us the need to create an ontology particular to our application that could map those concepts that were missing in the \textit{exercise ontology}, allowing us to relate also to the \textit{geosparql ontology} and create an end-point complete, that covers every functionality of our application.
 
 We did not map to some concepts that, also together with the other groups in the developing process of the ontology, we reputed not necessary, such as \texttt{HearthRate} and \texttt{Repeats}.
+
+The visualization of this ontology was realized with WEBVOWL\footnote{\url{http://vowl.visualdataweb.org/webvowl.html}} and is represented in figure \ref{db:exont}
 \section{Geosparql ontology}
 %blablabla on geosparql and how we mapped to it [problems we had go here?]
 The OGC GeoSPARQL standard \footnote{http://www.opengeospatial.org/standards/geosparql} is a standard for representation and querying of geospatial data for the Semantic Web. It defines an ontology in \texttt{RDFS/OWL} and a \texttt{SPARQL} query interface.
@@ -93,6 +95,8 @@ As described in the previous sections, our ontology covers the classes and conce
 In this ontology we define a \texttt{Track} and an \texttt{ExerciseSpot} that are both subclasses of \texttt{geo:Feature}. This allows to inherit the property \texttt{geo:hasGeometry}, that will be used in the mapping to the ontology to finally map the geometry of the tracks and exercise spots to the \textit{geoSPARQL ontology}.
 
 We also define many properties like \texttt{isAlongTrack}, \texttt{hasTrack}, \texttt{performed}, \texttt{hasTags} and \texttt{hasReview}, that complete the set of data we have stored in our application.
+
+The visualization of our own ontology was alzo realized with WEBVOWL\footnote{\url{http://vowl.visualdataweb.org/webvowl.html}} and is represented in figure \ref{db:ownont}
 
 \chapter{Tools}
 \section{PostgreSQL and db2triples}
@@ -114,7 +118,7 @@ Our dataset also include elevation of the tracks, which are therefore stored as 
 
 \chapter{Non trivial demonstrator}
 \section{The application}
-Our demonstrator provides an interface with a map\footnote{http://leafletjs.com/} where users are able to see all tracks in the displayed area, as well as the exercises spots along these tracks. The users are also able to find tracks by activity type. Moreover, given a track, a user will be able to find related exercises: exercises spots along the track, crossing or nearby tracks, or similar tracks by activity type or tags.
+Our demonstrator provides an interface with a map made with Leaflet\footnote{http://leafletjs.com/} where users are able to see all tracks in the displayed area, as well as the exercises spots along these tracks. The users are also able to find tracks by activity type. Moreover, given a track, a user will be able to find related exercises: exercises spots along the track, crossing or nearby tracks, or similar tracks by activity type or tags. The interface of our web application can be found in figure \ref{app:scshot}.
 
 These functionalities can be found on buttons placed on the upper left of the map as buttons. The first button displays all the tracks that fit in the current shown map. The second one queries all the tracks that have at least once been used for biking and displays all of them on the map. The third and last button displays all the exercise spots on the map.
 
@@ -200,7 +204,6 @@ WHERE {
   ).
 }
 \end{lstlisting}
-\pagebreak
 \begin{lstlisting} [caption={Query for tracks used at least once for biking},label=query:tracksbiking]
 SELECT DISTINCT ?ex ?track ?geom
 WHERE {
@@ -232,11 +235,27 @@ WHERE {
     <${track}> ont:hasTags ?tag.
     ?track ont:hasTags ?tag.
 \end{lstlisting}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{exOntology.png}
+    \caption{Visualization of the Exercise ontology}
+    \label{db:exont}
+\end{figure}
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{ownOntology.png}
+    \caption{Visualization our own ontology}
+    \label{db:ownont}
+\end{figure}
 
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{er-diagram.png}
     \caption{Entity Relationship diagram}
     \label{db:er}
+\end{figure}
+
+\begin{figure}[h]
+    \includegraphics[width=\textwidth]{webapp.png}
+    \caption{Web application Interface}
+    \label{app:scshot}
 \end{figure}
 
 \end{document}
