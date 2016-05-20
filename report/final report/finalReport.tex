@@ -133,9 +133,9 @@ The query \ref{query:tracksinbox} is a little bit more complicated. It takes arg
 
 The query \ref{query:trackscrossing} uses the geosparql function \texttt{sfIntersects()} in order to get all the tracks that have an intersection with the specified track. This would allow a user to, for example, know where he can change track.
 
-Another useful piece of information a user would need is how to find tracks close to a particular place (e.g. his workplace or home). This is achieved by the query \ref{query:tracksbiking}.
+Another useful piece of information a user would need is how to find tracks close to a particular place (e.g. his workplace or home). This is achieved by the query \ref{query:tracksdistance}.
 
-The last type of query we used as an example allows us to get all the tracks that have been used for a particular activity. Query \ref{query:tracksbiking} shows an example for the biking activity.
+The last type of query we used as an example allows us to get all the tracks that have been used for a particular activity. Query \ref{query:trackstags} shows an example for the biking activity.
 
 
 
@@ -214,7 +214,7 @@ WHERE {
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Query for tracks within a specified distance of a point }, label = query:tracksbiking ]
+\begin{lstlisting}[caption={Query for tracks within a specified distance of a point }, label = query:tracksdistance ]
 SELECT DISTINCT ?track ?geom ?dis
 WHERE {
     ?track rdf:type ont:Track.
@@ -227,7 +227,7 @@ WHERE {
 }
 \end{lstlisting}
 
-\begin{lstlisting}[caption={Query for tracks with a tag common with a specified track }, label = query:tracksbiking ]
+\begin{lstlisting}[caption={Query for tracks with a tag common with a specified track }, label = query:trackstags ]
 SELECT DISTINCT ?track ?geom
 WHERE {
     ?track rdf:type ont:Track.
