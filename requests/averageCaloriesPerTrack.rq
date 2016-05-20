@@ -1,0 +1,23 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX sf: <http://www.opengis.net/ont/sf#>
+PREFIX spatial: <http://jena.apache.org/spatial#>
+PREFIX uom: <http://www.opengis.net/def/uom/OGC/1.0/>
+PREFIX xs: <http://www.w3.org/2001/XMLSchema#>
+
+
+PREFIX exont: <http://webprotege.stanford.edu/ontologies/ExerciseOntology#>
+PREFIX ont: <http://openis.ititou.be/ont#>
+
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+
+SELECT DISTINCT
+    ?track (AVG(?calories) AS ?avgcalories)
+WHERE {
+    ?track rdf:type ont:Track .
+    ?track ont:performed ?exercise .
+    ?exercise exont:NumberOfCalories ?calories .
+}
+GROUP BY ?track

@@ -135,6 +135,8 @@ The query \ref{query:trackscrossing} uses the geosparql function \texttt{sfInter
 
 Another useful piece of information a user would need is how to find tracks close to a particular place (e.g. his workplace or home). This is achieved by the query \ref{query:tracksdistance}.
 
+It is also possible to use queries to advice users on which track they should choose. For example, the query \ref{query:trackscalories} shows the average amount of calories burnt by users on each track.
+
 The last type of query we used as an example allows us to get all the tracks that have been used for a particular activity. Query \ref{query:trackstags} shows an example for the biking activity.
 
 
@@ -235,6 +237,18 @@ WHERE {
     <${track}> ont:hasTags ?tag.
     ?track ont:hasTags ?tag.
 \end{lstlisting}
+
+\begin{lstlisting}[caption={Query for average calories burnt per track}, label=query:trackscalories]
+SELECT DISTINCT
+    ?track (AVG(?calories) AS ?avgcalories)
+WHERE {
+    ?track rdf:type ont:Track .
+    ?track ont:performed ?exercise .
+    ?exercise exont:NumberOfCalories ?calories .
+}
+GROUP BY ?track
+\end{lstlisting}
+
 \begin{figure}[h]
     \includegraphics[width=\textwidth]{exOntology.png}
     \caption{Visualization of the Exercise ontology}
