@@ -96,14 +96,15 @@
             SPARQL.update(template(payload));
         }
 
-        function addTrack(linestring){
+        function addTrack(linestring, length){
             var template = SPARQL.loadTemplate('addTrack');
             var args = {
                 id: new Date().getTime().toString(),
-                linestring: linestring
+                linestring: linestring,
+                length: length
             };
             console.log(linestring);
-            SPARQL.update(template(payload));
+            SPARQL.update(template(args));
         }
 
         function showData(data) {
@@ -275,7 +276,14 @@
                         var wkt = 'LINESTRING(' + coords.map(function(x){
                             return x[0] + ' ' + x[1];
                         }).join(',') + ')';
-                        addTrack(wkt);
+                        var length = 0;
+
+                        for (var i=1; i<coords.length; i++){
+                            var p1 = L.latLng(coords[i-1][1], coords[i-1][0]);
+                            var p2 = L.latLng(coords[i][1], coords[i][0]);
+                            length += p1.distanceTo(p2);
+                        }
+                        addTrack(wkt, length);
                     }
                 }
             }
@@ -414,8 +422,8 @@
         {
             <http://tracker.space/track/${id}>
                 rdf:type tr:Track;
-                tr:hasLength geof:length(STRDT("${linestring}", sf:wktLiteral));
-                tr:hasGeometry ${linestring}.
+                tr:hasLength ${length};
+                tr:hasGeometry "${linestring}".
         }
     </div>
 </body>
