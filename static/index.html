@@ -331,7 +331,7 @@
         WHERE {
           ?track rdf:type tr:Track.
           ?track geo:hasGeometry ?geom.
-          <${track}> geo:hasGeometry ?x.
+          &lt;${track}&gt; geo:hasGeometry ?x.
           FILTER (
             geof:sfIntersects(
               STRDT(?x, sf:wktLiteral),
@@ -365,7 +365,7 @@
         SELECT DISTINCT ?type ?duration ?rating ?review
         WHERE {
             ?exercise rdf:type exont:Exercise.
-            <${track}> ont:performed ?exercise.
+            &lt;${track}&gt; ont:performed ?exercise.
             ?exercise exont:HasType ?type.
             ?exercise exont:Duration ?duration.
             ?exercise exont:Rating ?rating.
@@ -378,7 +378,7 @@
         WHERE {
             ?exercise_spot rdf:type ont:ExerciseSpot.
             ?track rdf:type ont:Track.
-            ?exercise_spot ont:isAlongTrack <${track}>.
+            ?exercise_spot ont:isAlongTrack &lt;${track}&gt;.
             ?exercise_spot geo:hasGeometry ?geom.
         }
     </div>
@@ -388,7 +388,7 @@
         WHERE {
             ?track rdf:type ont:Track.
             ?track geo:hasGeometry ?geom.
-            <${track}> ont:hasTags ?tag.
+            &lt;${track}&gt; ont:hasTags ?tag.
             ?track ont:hasTags ?tag.
         }
     </div>
@@ -396,7 +396,7 @@
     <div class="sparql-template" id="addExercise">
         INSERT DATA
         {
-            <http://tracker.space/exercise/${id}/>
+            &lt;http://tracker.space/exercise/${id}/&gt;
                 rdf:type exont:Exercise ;
                 exont:HasType "${type}" ;
                 exont:NumberOfCalories "${calories}"^^xs:double ;
@@ -404,23 +404,23 @@
                 exont:Duration "${duration}"^^xs:double ;
                 exont:Rating "${rating}"^^xs:integer ;
                 ont:hasReview "${review}" ;
-                ont:hasTrack <${track}> ;
-                ont:ExerciseIn <http://tracker.space/workout/${id}> .
+                ont:hasTrack &lt;${track}&gt; ;
+                ont:ExerciseIn &lt;http://tracker.space/workout/${id}&gt; .
 
-            <${track}> ont:performed <http://tracker.space/exercise/${id}/> .
+            &lt;${track}&gt; ont:performed &lt;http://tracker.space/exercise/${id}/&gt; .
 
-            <http://tracker.space/user/1> exont:UserOf <http://tracker.space/workout/${id}> .
+            &lt;http://tracker.space/user/1&gt; exont:UserOf &lt;http://tracker.space/workout/${id}&gt; .
 
-            <http://tracker.space/workout/${id}> 
+            &lt;http://tracker.space/workout/${id}&gt;
                 exont:HasDate "${date}"^^xs:dateTime ;
-                exont:HasExercice <http://track.space/exercise/${id}/>.
+                exont:HasExercice &lt;http://track.space/exercise/${id}/&gt;.
         }
     </div>
 
     <div class="sparql-template" id="addTrack">
         INSERT DATA
         {
-            <http://tracker.space/track/${id}>
+            &lt;http://tracker.space/track/${id}&gt;
                 rdf:type tr:Track;
                 tr:hasLength ${length};
                 tr:hasGeometry "${linestring}".
